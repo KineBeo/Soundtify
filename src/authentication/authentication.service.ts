@@ -41,7 +41,7 @@ export class AuthenticationService {
                 refreshToken: await this.createRefreshTokenForUser(user.email)
             }
         } catch (e) {
-            throw new UnauthorizedException('Invalid credentials');
+            throw new UnauthorizedException(e.message);
         }
     }
 
@@ -68,5 +68,10 @@ export class AuthenticationService {
         user.currentRefreshToken = refreshToken;
         console.log(user);
         return refreshToken;
+    }
+
+    public async validateRefreshTokenCreateNewAcessToken(refreshToken: string) {
+        const user = await this.jwtService.decode(refreshToken) as TokenPayload;
+        return this.createAccessTokenForUser(await this.usersService.getByEmail(user.email));
     }
 }
