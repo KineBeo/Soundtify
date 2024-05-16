@@ -72,4 +72,8 @@ export class UsersService {
         
         throw new BadRequestException('User not found');
     }
+
+    async count(email: string) {
+        return await this.usersRepository.count({ where: { email } });
+    }
 }
