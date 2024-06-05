@@ -1,8 +1,8 @@
-import {Column, Entity, ManyToMany, PrimaryGeneratedColumn, } from "typeorm";
+import {Column, Double, Entity, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn, } from "typeorm";
 import { Collection } from "src/collection/collection.entity";
 @Entity()
 export class Track {
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     public id: number;
 
     @Column({ nullable: true })
@@ -23,7 +23,7 @@ export class Track {
     @Column({ nullable: true })
     public keywords: string;
 
-    @Column({ nullable: true })
+    @Column({type: 'decimal', nullable: true })
     public duration: number;
 
     @Column({ nullable: true })

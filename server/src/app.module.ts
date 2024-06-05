@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/uses.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { TrackModule } from './track/track.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -19,7 +20,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
       signOptions: { expiresIn: '60s'}
     }),
     AuthenticationModule,
-    UsersModule],
+    UsersModule,
+    TrackModule],
   controllers: [AppController],
   providers: [AppService],
 })
