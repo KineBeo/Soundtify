@@ -11,11 +11,8 @@ export class Artist {
     @Column()
     public displayname: string;
 
-    @Column()
-    public avatarUrl: string;
-
-    @Column()
-    public avatarColor: string;
+    @Column({ type: "jsonb", nullable: true })
+    avatar: any; // This is a JSON object
 
     @Column()
     public gender: string;
