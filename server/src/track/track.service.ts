@@ -30,14 +30,26 @@ export class TrackService {
 
 
     async getTrackById(id: number) {
-        return await this.trackRepository.findOne({
+        const res = await this.trackRepository.findOne({
             where: { id }
         });
+        if (!res) {
+            throw new BadRequestException('Track not found');
+        } else {
+            return res;
+        }
     }
 
     async getTrackByName(track_name: string) {
         return await this.trackRepository.findOne({
             where: { track_name }
+        });
+    }
+
+    async getTrackOfArtist(user_id: number) {
+        return await this.trackRepository.find({
+            where: { user_id },
+            select: ["id", "duration", "track_name", "src", "cover_image", "user_id"],
         });
     }
 

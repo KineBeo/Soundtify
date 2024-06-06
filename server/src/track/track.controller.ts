@@ -33,6 +33,11 @@ export class TrackController {
         return this.trackService.getTrackByName(track_name);
     }
 
+    @Get('/artist/:user_id')
+    async getTrackOfArtist(@Param('user_id') user_id: number) {
+        return this.trackService.getTrackOfArtist(user_id);
+    }
+
     // DELETE 
     @Delete('/:id')
     async deleteTrack(@Param('id') id: number) {
