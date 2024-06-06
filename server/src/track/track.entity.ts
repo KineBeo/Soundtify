@@ -1,4 +1,4 @@
-import {Column, Double, Entity, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn, } from "typeorm";
+import {Column, Entity, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn, } from "typeorm";
 import { Collection } from "src/collection/collection.entity";
 @Entity()
 export class Track {
@@ -27,16 +27,16 @@ export class Track {
     public duration: number;
 
     @Column({ nullable: true })
-    public trackName: string;
+    public track_name: string;
 
     @Column({ nullable: true })
-    downloadUrl: string;
+    public download_url: string;
 
     @Column({ nullable: true })
-    sourceUrl: string;
+    public src: string;
 
     @Column({ type: "jsonb", nullable: true })
-    coverImage: any; // This is a JSON object
+    cover_image: any; // This is a JSON object
 
     @ManyToMany(() => Collection, (collection) => collection.tracks)
     public collections: Collection[];

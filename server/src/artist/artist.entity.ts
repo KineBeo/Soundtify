@@ -9,7 +9,7 @@ export class Artist {
     public username: string;
 
     @Column()
-    public displayname: string;
+    public display_name: string;
 
     @Column({ type: "jsonb", nullable: true })
     avatar: any; // This is a JSON object

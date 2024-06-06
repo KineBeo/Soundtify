@@ -12,6 +12,11 @@ export class TrackController {
         return this.trackService.createTrack(newTrackData);
     }
 
+    @Post('create-many')
+    async createManyWithJson(@Body() newTracksData: CreateTrackDto[]) {
+        return this.trackService.createManyTracks(newTracksData);
+    }
+
     // GET
     @Get('all-tracks') 
     async getAllTracks() {
@@ -21,6 +26,11 @@ export class TrackController {
     @Get('/:id')
     async getTrackById(@Param('id') id: number) {
         return this.trackService.getTrackById(id);
+    }
+
+    @Get('/name/:track_name')
+    async getTrackByName(@Param('track_name') track_name: string) {
+        return this.trackService.getTrackByName(track_name);
     }
 
     // DELETE 

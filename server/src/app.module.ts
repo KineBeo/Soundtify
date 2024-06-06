@@ -7,6 +7,7 @@ import { UsersModule } from './users/uses.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { TrackModule } from './track/track.module';
+import { ArtistModule } from './artist/artist.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -14,14 +15,15 @@ import { TrackModule } from './track/track.module';
     isGlobal: true,
   }),
     DatabaseModule,
-    JwtModule.register({
-      global: true,
-      secret: process.env.JWT_ACCESS_TOKEN_SECRET,
-      signOptions: { expiresIn: '60s'}
-    }),
+  JwtModule.register({
+    global: true,
+    secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+    signOptions: { expiresIn: '60s' }
+  }),
     AuthenticationModule,
     UsersModule,
-    TrackModule],
+    TrackModule,
+    ArtistModule,],
   controllers: [AppController],
   providers: [AppService],
 })

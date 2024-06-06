@@ -17,10 +17,17 @@ export class TrackService {
         return newTrack;
     }
 
+    async createManyTracks(newTracksData: CreateTrackDto[]) {
+        const newTracks = this.trackRepository.create(newTracksData);
+        await this.trackRepository.save(newTracks);
+        return newTracks;
+    }
+
     // GET 
     async getAllTracks() {
         return await this.trackRepository.find();
     }
+
 
     async getTrackById(id: number) {
         return await this.trackRepository.findOne({
@@ -28,7 +35,14 @@ export class TrackService {
         });
     }
 
+    async getTrackByName(track_name: string) {
+        return await this.trackRepository.findOne({
+            where: { track_name }
+        });
+    }
+
     // DELETE
+
     async deleteTrack(id: number) {
         const track = await this.trackRepository.findOne({
             where: { id }
