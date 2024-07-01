@@ -12,6 +12,7 @@ export class UsersService {
     ) { }
 
     async getAllUsers() {
+        console.log('Getting all users');
         return await this.usersRepository.find();
     }
 
@@ -42,7 +43,7 @@ export class UsersService {
 
     async delete(id: number) {
         const user = await this.usersRepository.findOne({
-             where: { id } 
+            where: { id }
         });
 
         if (user) {
@@ -69,7 +70,7 @@ export class UsersService {
                 where: { id }
             });
         }
-        
+
         throw new BadRequestException('User not found');
     }
 

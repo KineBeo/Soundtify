@@ -23,6 +23,11 @@ export default class AuthenticationController {
         return this.authenticationService.login(email, password);
     }
 
+    @Post('logout')
+    async logout() {
+        return this.authenticationService.logout();
+    }
+
     @UseGuards(JwtAuthenticationGuard)
     @Get('all-users')
     async getAllUsers() {

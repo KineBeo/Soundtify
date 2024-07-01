@@ -26,7 +26,10 @@ export class AuthenticationService {
                 password: hashedPassword,
             })
             createdUser.password = undefined;
-            return createdUser;
+            return {
+                message: 'User created successfully',
+                user: createdUser
+            }
         } catch (error) {
             throw new BadRequestException(error.message);
         }
@@ -37,11 +40,20 @@ export class AuthenticationService {
             const user = await this.usersService.getByEmail(email);
             await this.verifyPassword(plainTextPassword, user.password);
             return {
+                message: 'Login successful',
                 accessToken: this.createAccessTokenForUser(user),
-                refreshToken: await this.createRefreshTokenForUser(user.email)
+                refreshToken: await this.createRefreshTokenForUser(user.email),
+                email: user.email,
+                name: user.name,
             }
         } catch (e) {
             throw new UnauthorizedException(e.message);
+        }
+    }
+
+    public async logout() {
+        return {
+            message: 'Logout successful'
         }
     }
 
