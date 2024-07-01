@@ -21,7 +21,7 @@ export default function Login() {
             if (response) {
                 dispatch(login(response));
                 push('/');
-                console.log('Login response of login.tsx:', response);
+                // console.log('Login response of login.tsx:', response);
             } else {
                 setError('Login failed. Please check your credentials.');
             }

@@ -24,8 +24,8 @@ export default class AuthenticationController {
     }
 
     @Post('logout')
-    async logout() {
-        return this.authenticationService.logout();
+    async logout(email: string) {
+        return this.authenticationService.logout(email);
     }
 
     @UseGuards(JwtAuthenticationGuard)

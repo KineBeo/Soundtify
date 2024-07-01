@@ -35,10 +35,10 @@ const authSlice = createSlice({
             console.log('authSlice: login action dispatched', { accessToken, refreshToken, email, name });
         },
 
-        logOut: (state, action) => {
+        logOut: (state) => {
             state.accessToken = null;
             state.refreshToken = null;
-            state.email = null;
+            // state.email = null;
             state.name = null;
         }
     }
@@ -53,6 +53,6 @@ export const selectCurrentUserEmail = (state: RootState) => state.auth.email;
 // export const selectCurrentUserId = (state: RootState) => state.auth.id;
 export const selectIsLoggedIn = (state: RootState) => {
     const isLoggedIn = !!state.auth.accessToken;
-    console.log('selectIsLoggedIn called:', isLoggedIn, 'this is state.auth', state.auth);
+    // console.log('selectIsLoggedIn called:', isLoggedIn, 'this is state.auth', state.auth);
     return isLoggedIn;
 };

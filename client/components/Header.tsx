@@ -6,8 +6,10 @@ import { HiHome } from 'react-icons/hi';
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
 import { twMerge } from 'tailwind-merge';
 import Button from './Button';
-import { selectIsLoggedIn, selectCurrentname } from '@/lib/features/auth/authSlice';
-import { useAppSelector } from '@/lib/hook';
+import { selectIsLoggedIn, selectCurrentname, selectCurrentUserEmail, logOut } from '@/lib/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hook';
+import { FaUserAlt } from 'react-icons/fa';
+import { useLogoutMutation } from '@/lib/features/auth/authApi';
 interface HeaderProps {
     children: React.ReactNode;
     className?: string;
@@ -19,19 +21,34 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
 
     const router = useRouter();
+    const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(selectIsLoggedIn);
     const username = useAppSelector(selectCurrentname);
-    const authState = useAppSelector(state => state.auth);  // Add this line
+    const userEmail = useAppSelector(selectCurrentUserEmail);
+    const [logout] = useLogoutMutation();
+    const authState = useAppSelector(state => state.auth);
 
     useEffect(() => {
         console.log('Header re-rendered. isLoggedIn:', isLoggedIn, 'username:', username);
     }, [isLoggedIn, username]);
 
-    console.log('Auth State:', authState);  // Add this line
-    console.log('Is Logged In:', isLoggedIn);  // Add this line
+    console.log('Auth State:', authState);
+    console.log('Is Logged In:', isLoggedIn);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         // handle logout
+        if (userEmail) {
+            try {
+                await logout(userEmail).unwrap();
+                dispatch(logOut());
+                // router.refresh();
+                router.push('/');
+                console.log('Logged out successfully');
+            } catch (error) {
+                console.log('Error logging out:', error);
+            }
+        }
+
     }
     return (
         <div className={twMerge(`
@@ -115,7 +132,21 @@ const Header: React.FC<HeaderProps> = ({
                 items-center
                 gap-x-4
                 '>
-                    {!isLoggedIn ? (
+                    {isLoggedIn ? (
+                        <div className='flex gap-x-4 items-center'>
+                            <Button onClick={handleLogout}
+                                className='bg-white px-6 py-2'
+                            >
+                                Logout
+                            </Button>
+                            <Button
+                                onClick={() => router.push('/account')}
+                                className="bg-white"
+                            >
+                                <FaUserAlt />
+                            </Button>
+                        </div>
+                    ) : (
                         <>
                             <div>
                                 <Button
@@ -135,16 +166,11 @@ const Header: React.FC<HeaderProps> = ({
                                 </Button>
                             </div>
                         </>
-                    ) : (
-                        <div>
-                            Welcome, {username}!
-                            {/* Add a logout button here if needed */}
-                        </div>
                     )}
                 </div>
             </div>
             {children}
-        </div>
+        </div >
     );
 }
 

@@ -51,9 +51,16 @@ export class AuthenticationService {
         }
     }
 
-    public async logout() {
-        return {
-            message: 'Logout successful'
+    public async logout(email: string) {
+        try {
+            // clear the refresh token for the user 
+            // so that the user can't create a new access token
+            await this.clearRefreshToken(email);
+            return {
+                message: 'Logout successful'
+            }
+        } catch (error) {
+            throw new BadRequestException(error.message);
         }
     }
 
@@ -85,5 +92,12 @@ export class AuthenticationService {
     public async validateRefreshTokenCreateNewAcessToken(refreshToken: string) {
         const user = await this.jwtService.decode(refreshToken) as TokenPayload;
         return this.createAccessTokenForUser(await this.usersService.getByEmail(user.email));
+    }
+
+    public async clearRefreshToken(userEmail: string) {
+        const user = await this.usersService.getByEmail(userEmail);
+        if (user) {
+            user.currentRefreshToken = null;
+        }
     }
 }
