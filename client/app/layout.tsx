@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import StoreProvider from "./StoreProvider";
-const font = Figtree({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Soundtify",
@@ -16,15 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body className={font.className}>
+    <html lang="en">
+      <body className={font.className}>
+        <StoreProvider>
           <Sidebar>
             {children}
           </Sidebar>
-        </body>
-      </html>
-
-    </StoreProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }

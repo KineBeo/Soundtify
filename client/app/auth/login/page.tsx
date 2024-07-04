@@ -4,13 +4,14 @@ import { useAppDispatch, useAppSelector } from "@/lib/hook";
 import { useLoginMutation } from "@/lib/features/auth/authApi";
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/features/auth/authSlice";
+
 export default function Login() {
+    const [loginMutation, { isLoading }] = useLoginMutation();
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
     const { push } = useRouter();
     const dispatch = useAppDispatch();
-    const [loginMutation, { isLoading }] = useLoginMutation();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,7 +22,6 @@ export default function Login() {
             if (response) {
                 dispatch(login(response));
                 push('/');
-                // console.log('Login response of login.tsx:', response);
             } else {
                 setError('Login failed. Please check your credentials.');
             }
@@ -89,7 +89,16 @@ export default function Login() {
                                     {isLoading ? 'Signing in...' : 'Sign in'}
                                 </button>
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Don't have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                                    Don't have an account yet?
+                                    <a href="#"
+                                        onClick={() => push('/auth/register')}
+                                        className="
+                                    font-medium 
+                                    text-primary-600 
+                                    hover:underline 
+                                    dark:text-primary-500">
+                                        Sign up
+                                    </a>
                                 </p>
                             </form>
                         </div>

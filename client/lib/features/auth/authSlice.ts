@@ -8,16 +8,28 @@ export type LoginResponse = {
     name: string;
 }
 
-const initialState: {
+export type RegisterResponse = {
+    email: string;
+    name: string;
+}
+
+interface AuthState {
     accessToken: string | null;
     refreshToken: string | null;
     email: string | null;
     name: string | null;
-} = {
+    isLoggedIn: boolean;
+    isRegistered: boolean;
+}
+
+
+const initialState: AuthState = {
     accessToken: null,
     refreshToken: null,
     email: null,
     name: null,
+    isLoggedIn: false,
+    isRegistered: false,
 };
 
 
@@ -31,28 +43,33 @@ const authSlice = createSlice({
             state.refreshToken = refreshToken;
             state.email = email;
             state.name = name;
-            // state.id = id;
-            console.log('authSlice: login action dispatched', { accessToken, refreshToken, email, name });
+            state.isLoggedIn = true;
+            state.isRegistered = true;
+
+        },
+
+        register: (state, action: PayloadAction<RegisterResponse>) => {
+            const { email, name } = action.payload;
+            state.email = email;
+            state.name = name;
+            state.isRegistered = true;
         },
 
         logOut: (state) => {
             state.accessToken = null;
             state.refreshToken = null;
-            // state.email = null;
+            state.isLoggedIn = false;
+            state.isRegistered = false;
             state.name = null;
         }
     }
 });
 
-export const { login, logOut } = authSlice.actions;
+export const { login, register, logOut } = authSlice.actions;
 
 export default authSlice.reducer;
 
 export const selectCurrentname = (state: RootState) => state.auth.name;
 export const selectCurrentUserEmail = (state: RootState) => state.auth.email;
-// export const selectCurrentUserId = (state: RootState) => state.auth.id;
-export const selectIsLoggedIn = (state: RootState) => {
-    const isLoggedIn = !!state.auth.accessToken;
-    // console.log('selectIsLoggedIn called:', isLoggedIn, 'this is state.auth', state.auth);
-    return isLoggedIn;
-};
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectIsRegistered = (state: RootState) => state.auth.isRegistered;

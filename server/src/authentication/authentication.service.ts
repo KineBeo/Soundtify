@@ -28,7 +28,8 @@ export class AuthenticationService {
             createdUser.password = undefined;
             return {
                 message: 'User created successfully',
-                user: createdUser
+                email: createdUser.email,
+                name: createdUser.name,
             }
         } catch (error) {
             throw new BadRequestException(error.message);
