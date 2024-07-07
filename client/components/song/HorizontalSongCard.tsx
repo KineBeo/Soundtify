@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Artist from "@/interfaces/artist";
 import Track from "@/interfaces/track";
 import Image from "next/image";

@@ -2,7 +2,6 @@ import { useAppDispatch } from '@/lib/hook';
 import Track from '@/interfaces/track';
 import React from 'react'
 import HorizontalSongCard from './HorizontalSongCard';
-import ScrollContainer from 'react-indiana-drag-scroll';
 import { Howl, Howler } from 'howler';
 interface HorizontalSongsListProps {
     songs: Track[];

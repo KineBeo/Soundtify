@@ -1,7 +1,6 @@
 import { useAppDispatch } from "@/lib/hook";
 import { useGetAllArtistQuery } from "../artist/artistApi";
 import { useGetAllTrackQuery } from "../track/trackApi";
-import error from "next/error";
 import { useEffect } from "react";
 import { setLoading, setError, setHomePageData } from "./homePageSlice";
 
