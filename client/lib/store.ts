@@ -6,6 +6,7 @@ import sessionStorage from 'redux-persist/es/storage/session'
 import { trackApi } from './features/track/trackApi'
 import { artistApi } from './features/artist/artistApi'
 import homePageReducer from './features/homePage/homePageSlice'
+import audioPlayerReducer from './features/audioPlayer/audioPlayerSlice'
 const persistCongfig = {
     key: 'root',
     storage: sessionStorage,
@@ -15,6 +16,7 @@ const persistCongfig = {
 const appReducer = combineReducers({
     homepage: homePageReducer,
     auth: authReducer,
+    audioPlayer: audioPlayerReducer,
     [authApi.reducerPath]: authApi.reducer,
     [trackApi.reducerPath]: trackApi.reducer,
     [artistApi.reducerPath]: artistApi.reducer

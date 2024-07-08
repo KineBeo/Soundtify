@@ -27,6 +27,7 @@ const HorizontalSongsList: React.FC<HorizontalSongsListProps> = ({
                     key={song.id}
                     song={song}
                     onClick={() => {
+                        console.log(songs.indexOf(song));
                         if (song.src) {
                             const sound = new Howl({
                                 src: [song.src],
