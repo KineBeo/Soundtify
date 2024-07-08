@@ -2,13 +2,15 @@ import { useAppDispatch } from '@/lib/hook';
 import Track from '@/interfaces/track';
 import React from 'react'
 import HorizontalSongCard from './HorizontalSongCard';
-import { Howl, Howler } from 'howler';
+import { setActiveSong } from '@/lib/features/audioPlayer/audioPlayerSlice';
 interface HorizontalSongsListProps {
     songs: Track[];
 }
 const HorizontalSongsList: React.FC<HorizontalSongsListProps> = ({
     songs
 }) => {
+
+    const dispatch = useAppDispatch();
     return (
         <div
             className='
@@ -27,15 +29,12 @@ const HorizontalSongsList: React.FC<HorizontalSongsListProps> = ({
                     key={song.id}
                     song={song}
                     onClick={() => {
-                        console.log(songs.indexOf(song));
-                        if (song.src) {
-                            const sound = new Howl({
-                                src: [song.src],
-                                html5: true,
-                            });
-                            sound.play();
-                        }
-
+                        dispatch(
+                            setActiveSong({
+                                index: songs.indexOf(song),
+                                songs: songs,
+                            })
+                        )
                     }}
                 />
             ))}
