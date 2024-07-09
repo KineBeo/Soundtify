@@ -4,6 +4,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import StoreProvider from "./StoreProvider";
 import AudioHandler from "@/components/AudioHandler";
+import dynamic from "next/dynamic";
+
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

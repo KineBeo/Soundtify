@@ -2,15 +2,15 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import { authApi } from './features/auth/authApi'
 import authReducer from './features/auth/authSlice'
-import sessionStorage from 'redux-persist/es/storage/session'
 import { trackApi } from './features/track/trackApi'
 import { artistApi } from './features/artist/artistApi'
 import homePageReducer from './features/homePage/homePageSlice'
 import audioPlayerReducer from './features/audioPlayer/audioPlayerSlice'
+import localStorage from 'redux-persist/es/storage'
+
 const persistCongfig = {
     key: 'root',
-    storage: sessionStorage,
-    version: 1,
+    storage: localStorage,
 }
 
 const appReducer = combineReducers({
@@ -29,7 +29,9 @@ export const makeStore = () => {
         reducer: persistedReducer,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
-                serializableCheck: false,
+                serializableCheck: {
+                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+                },
             }
             ).concat(authApi.middleware)
                 .concat(artistApi.middleware)

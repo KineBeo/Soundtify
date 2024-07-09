@@ -6,6 +6,7 @@ import { setLoading, setError, setHomePageData } from "./homePageSlice";
 
 export const getHomePageData = () => {
     try {
+        console.log("Fetching home page data");
         const dispatch = useAppDispatch();
         const { data: tracks, error: trackError, isLoading: isLoadingTrack } = useGetAllTrackQuery();
         const { data: artists, error: artistError, isLoading: isLoadingArtist } = useGetAllArtistQuery();
@@ -25,13 +26,6 @@ export const getHomePageData = () => {
             }
         }, [tracks, artists, trackError, artistError, isLoadingTrack, isLoadingArtist, dispatch]);
 
-
-        const processedData = {
-            randomArtists: artists?.slice(0, 6),
-            trendingArtists: artists?.slice(7, 10),
-            topHits: tracks?.slice(0, 6),
-            popular: tracks?.slice(7, 10),
-        }
         return {
             isLoading: isLoadingTrack || isLoadingArtist,
             error: trackError || artistError

@@ -56,15 +56,15 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                 <p className="font-semibold truncate w-full">
                     {song.track_name}
                 </p>
-                <p className="
+                {/* <p className="
                 text-neutral-400
                 text-sm
                 pb-4
                 w-full
                 truncate
                 ">
-                    By {song.user_id}
-                </p>
+                    By {artists}
+                </p> */}
             </div>
             <div className="
             absolute
