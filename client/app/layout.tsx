@@ -4,7 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import StoreProvider from "./StoreProvider";
 import AudioHandler from "@/components/AudioHandler";
-import dynamic from "next/dynamic";
+import Player from "@/components/AudioPlayer/Player";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -25,6 +25,7 @@ export default function RootLayout({
           <Sidebar>
             {children}
           </Sidebar>
+          <Player />
           <AudioHandler />
         </StoreProvider>
       </body>

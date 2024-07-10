@@ -1,26 +1,26 @@
 'use client'
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
-import { HomePageState, RequestStatus, setError, setHomePageData, setLoading } from "@/lib/features/homePage/homePageSlice";
+import { HomePageState, RequestStatus } from "@/lib/features/homePage/homePageSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hook";
 import HorizontalSongsList from "@/components/song/HorizontalSongsList";
 import { RootState } from "@/lib/store";
-import { getHomePageData } from "@/lib/features/homePage/homePageApi";
+// import { getHomePageData } from "@/lib/features/homePage/homePageApi";
 import HorizontalArtistList from "@/components/artist/HorizontalArtistList";
+import Loading from "@/components/Loading";
+import { useHomePageData } from "@/lib/features/homePage/homePageApi";
 export default function Home() {
 
-
-  const { isLoading, error } = getHomePageData();
-  const { recentUsers: recentArtist,
-    trendingArtists,
-    topHits,
-    popularHits,
-    status }
-    : HomePageState = useAppSelector((state: RootState) => state.homepage);
-
+  const { recentUsers: recentArtist, 
+    trendingArtists, 
+    topHits, 
+    popularHits, 
+    status } = useHomePageData();
   return (
     <div>
-      {isLoading ? (<div> Loading...</div>) : (<div className="
+      {status == RequestStatus.Loading ? (
+        <Loading />
+      ) : (<div className="
           bg-neutral-900
           rounded-lg
           h-full

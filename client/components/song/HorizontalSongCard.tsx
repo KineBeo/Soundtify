@@ -4,6 +4,8 @@ import Track from "@/interfaces/track";
 import Image from "next/image";
 import Link from "next/link";
 import PlayPauseButton from "../PlayPauseButton";
+import { useAppSelector } from "@/lib/hook";
+import { RootState } from "@/lib/store";
 interface HorizontalSongCardProps {
     song: Track
     onClick: () => void;
@@ -11,7 +13,7 @@ interface HorizontalSongCardProps {
 
 function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
 
-
+    const { activeSong, isPlaying } = useAppSelector((state: RootState) => state.audioPlayer);
     return (
         <div
             className="
@@ -70,7 +72,8 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
             absolute
             bottom-24
             right-5">
-                <PlayPauseButton />
+                <PlayPauseButton
+                    isPlaying={(activeSong?.id === song.id) && isPlaying} />
             </div>
             {/* <p className="line-clamp-2 mt-0.5 text-sm text-gray-400 sm:text-xs md:text-xs">
                     {artists.map((artist: Artist, index: number) => (

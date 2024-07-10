@@ -26,6 +26,7 @@ function AudioHandler() {
     const dispatch = useAppDispatch();
     const audioRef = useRef<Howl | null>(null);
     const isReady = useRef(false);
+
     useEffect(() => {
         if (isPlaying) {
             if (audioRef.current) {

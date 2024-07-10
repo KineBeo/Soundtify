@@ -1,13 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity() 
+@Entity()
 export class Liked {
-    @PrimaryGeneratedColumn()
-    public id: number;
+  @PrimaryGeneratedColumn()
+  public id: number;
 
-    @Column()
-    public trackId: number;
+  @Column()
+  public trackId: number;
 
-    @Column()
-    public username: string;
+  @Column()
+  public userId: number;
 }

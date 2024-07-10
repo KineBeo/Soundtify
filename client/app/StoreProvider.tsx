@@ -1,4 +1,5 @@
 'use client'
+import Loading from '@/components/Loading'
 import { AppStore, makeStore } from '@/lib/store'
 import { useEffect, useRef, useState } from 'react'
 import { Provider } from 'react-redux'
@@ -15,19 +16,13 @@ export default function StoreProvider({
     if (!storeRef.current) {
         storeRef.current = makeStore()
     }
-    useEffect(() => {
-        const persistor = persistStore(storeRef.current!);
-        persistor.persist();
-        setIsHydrated(true);
-    }, []);
 
-    if (!isHydrated) {
-        return <div>Loading...</div>; // Or any loading indicator
-    }
+    const persistor = persistStore(storeRef.current!);
+    persistor.persist();
 
     return (
         <Provider store={storeRef.current}>
-            <PersistGate persistor={persistStore(storeRef.current)}>
+            <PersistGate loading={<Loading />} persistor={persistStore(storeRef.current)}>
                 {children}
             </PersistGate>
         </Provider>
