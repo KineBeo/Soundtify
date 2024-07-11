@@ -11,19 +11,19 @@ export class LikedService {
     private likedRepository: Repository<Liked>,
   ) {}
 
-  async addLike(trackId: number, user: User): Promise<Liked> {
+  async addLike(trackId: number, userId: number): Promise<Liked> {
     try {
-      return await this.likedRepository.save({ trackId, userId: user.id });
+      return await this.likedRepository.save({ trackId, userId });
     } catch (error) {
       console.error(error);
     }
   }
 
-  async removeLiked(trackId: number, user: User): Promise<object> {
+  async removeLiked(trackId: number, userId: number): Promise<object> {
     try {
       const result = await this.likedRepository.delete({
         trackId,
-        userId: user.id,
+        userId,
       });
 
       if (result.affected === 0) {
@@ -36,11 +36,11 @@ export class LikedService {
     }
   }
 
-  async getLiked(user: User): Promise<Liked[]> {
+  async getLiked(userId: number): Promise<Liked[]> {
     try {
       return await this.likedRepository.find({
         where: {
-          userId: user.id,
+          userId,
         },
       });
     } catch (error) {
@@ -48,12 +48,12 @@ export class LikedService {
     }
   }
 
-  async checkLiked(trackId: number, user: User): Promise<boolean> {
+  async checkLiked(trackId: number, userId: number): Promise<boolean> {
     try {
       const count = await this.likedRepository.count({
         where: {
           trackId,
-          userId: user.id,
+          userId,
         },
       });
       return count > 0;

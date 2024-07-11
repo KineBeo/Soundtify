@@ -1,8 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import { useAppDispatch } from '@/lib/hook';
+import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import LikeButton from './LikeButton';
 interface ButtonsProps {
+    user_id: number,
     volume: number;
     updateVolume: (volume: number) => void;
     className: string;
@@ -12,6 +13,7 @@ interface ButtonsProps {
 }
 
 const Buttons: React.FC<ButtonsProps> = ({
+    user_id,
     volume,
     updateVolume,
     className,
@@ -23,8 +25,8 @@ const Buttons: React.FC<ButtonsProps> = ({
     const dispatch = useAppDispatch();
     return (
         <div className='w-full flex flex-row justify-end items-center'>
-            <div>
-                <LikeButton song_id={song_id} size={25} isList={false} />
+            <div className='flex flex-row items-center gap-1'>
+                <LikeButton user_id={user_id} song_id={song_id} size={25} isList={false} />
             </div>
         </div>
     )

@@ -20,7 +20,7 @@ import { LikedModule } from './liked/liked.module';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_ACCESS_TOKEN_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '3600s' },
     }),
     AuthenticationModule,
     UsersModule,

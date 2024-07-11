@@ -11,32 +11,42 @@ import {
 import { LikedService } from './liked.service';
 import JwtAuthenticationGuard from 'src/guards/jwt-authentication.guard';
 import User from 'src/users/uses.entity';
+import LikedDto from './dto/liked.dto';
+import getLikedDto from './dto/getLiked.dto';
 
 @Controller('liked')
 export default class LikedController {
   constructor(private readonly likedService: LikedService) {}
 
+  // Checked
   @Post()
   @UseGuards(JwtAuthenticationGuard)
-  async addLike(@Req() req, @Body('trackId') trackId: number) {
-    return this.likedService.addLike(trackId, req.user);
+  async addLike(@Body() dto: LikedDto) {
+    const { trackId, userId } = dto;
+    return this.likedService.addLike(trackId, userId);
   }
 
-  @Delete(':id')
+  // Checked
+  @Delete()
   @UseGuards(JwtAuthenticationGuard)
-  async removeLike(@Param('id') trackId: number, user: User) {
-    return this.likedService.removeLiked(trackId, user);
+  async removeLike(@Body() dto: LikedDto) {
+    const { trackId, userId } = dto;
+    return this.likedService.removeLiked(trackId, userId);
   }
 
+  // Checked
   @Get()
   @UseGuards(JwtAuthenticationGuard)
-  async getLiked(user: User) {
-    return this.likedService.getLiked(user);
+  async getLiked(@Body() dto: getLikedDto) {
+    const { userId } = dto;
+    return this.likedService.getLiked(userId);
   }
 
+  // Checked
   @Post('check')
   @UseGuards(JwtAuthenticationGuard)
-  async checkLiked(user: User, @Body() trackId: number) {
-    return this.likedService.checkLiked(trackId, user);
+  async checkLiked(@Body() dto: LikedDto) {
+    const { trackId, userId } = dto;
+    return this.likedService.checkLiked(trackId, userId);
   }
 }

@@ -1,16 +1,30 @@
+'use client'
 import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '@/lib/hook'
+import {
+    useAppDispatch,
+    useAppSelector
+} from '@/lib/hook'
 import { Tooltip } from '@nextui-org/react'
-import { addLike, removeLike } from '@/lib/features/audioPlayer/audioPlayerSlice'
-import { Like } from '@/lib/features/audioPlayer/audioPlayerThunk'
-import { BiLike } from 'react-icons/bi'
-import { BiHeart, BiSolidHeart } from 'react-icons/bi'
+import {
+    addLike,
+    removeLike
+} from '@/lib/features/audioPlayer/audioPlayerSlice'
+import {
+    BiHeart,
+    BiSolidHeart
+} from 'react-icons/bi'
+import {
+    useLikeTrackMutation,
+    useUnlikeTrackMutation
+} from '@/lib/features/audioPlayer/audioPlayerApi'
 interface LikeButtonProps {
+    user_id: number,
     song_id: number,
     size: number,
-    isList: any
+    isList: boolean
 }
 const LikeButton: React.FC<LikeButtonProps> = ({
+    user_id,
     song_id,
     size,
     isList
@@ -18,37 +32,50 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     const [like, setLike] = useState(false);
     const dispatch = useAppDispatch();
     const { liked } = useAppSelector(state => state.audioPlayer);
+    const [likeTrack] = useLikeTrackMutation();
+    const [unlikeTrack] = useUnlikeTrackMutation();
     useEffect(() => {
         setLike(liked.includes(song_id));
     }, [song_id, liked, like]);
+
+    const handleLike = async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        try {
+            dispatch(addLike({ song_id }));
+            setLike(true);
+            await likeTrack({ trackId: song_id, userId: user_id }).unwrap();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleUnlike = async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        try {
+            dispatch(removeLike({ song_id }));
+            setLike(false);
+            await unlikeTrack({ trackId: song_id, userId: user_id }).unwrap();
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div
             className={
-                isList &&
-                (like
-                    ? "visible"
-                    : "invisible group-hover:visible mobile:visible tablet:visible")
+                isList ?
+                    like
+                        ? "visible"
+                        : "invisible group-hover:visible mobile:visible tablet:visible" : undefined
             }
         >
             {!like
                 ? (<Tooltip content="Like">
-                    <i onClick={(event) => {
-                        event.stopPropagation();
-                        dispatch(addLike({ song_id }));
-                        setLike(true);
-                        dispatch(Like());
-
-                    }}>
+                    <i onClick={handleLike}>
                         <BiHeart size={size} />
                     </i>
                 </Tooltip>)
                 : (<Tooltip content="unlike">
-                    <i onClick={(event) => {
-                        event.stopPropagation();
-                        dispatch(removeLike({ song_id }));
-                        setLike(false);
-                        // dispatch(unLike());
-                    }}>
+                    <i onClick={handleUnlike}>
                         <BiSolidHeart className='text-[#2bb540]' size={size} />
                     </i>
                 </Tooltip>)}

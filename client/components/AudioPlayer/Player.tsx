@@ -16,7 +16,7 @@ const Player = () => {
         isShuffle,
         isRepeat,
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
-
+    const { id } = useAppSelector((state: RootState) => state.auth);
     const dispatch = useAppDispatch();
     const updateVolume = (volume: number) => {
         dispatch(playPause({ volume }));
@@ -87,6 +87,7 @@ const Player = () => {
                 {/* controls */}
                 {/* button */}
                 <Buttons
+                    user_id={id ? id : 0}
                     download_url={activeSong?.src || ""}
                     song_id={activeSong!.id}
                     updateVolume={updateVolume}

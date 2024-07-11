@@ -116,7 +116,6 @@ const audioPLayerSlice = createSlice({
     },
 
     reorderQueue: (state, action) => {
-      64;
       state.queue = action.payload;
     },
 

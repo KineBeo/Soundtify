@@ -2,67 +2,72 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "@/lib/store";
 
 export type LoginResponse = {
-    accessToken: string,
-    refreshToken: string,
-    email: string;
-    name: string;
-}
-
-export type RegisterResponse = {
-    email: string;
-    name: string;
-}
-
-interface AuthState {
-    accessToken: string | null;
-    refreshToken: string | null;
-    email: string | null;
-    name: string | null;
-    isLoggedIn: boolean;
-    isRegistered: boolean;
-}
-
-
-const initialState: AuthState = {
-    accessToken: null,
-    refreshToken: null,
-    email: null,
-    name: null,
-    isLoggedIn: false,
-    isRegistered: false,
+  accessToken: string;
+  refreshToken: string;
+  email: string;
+  name: string;
+  id: number;
 };
 
+export type RegisterResponse = {
+  email: string;
+  name: string;
+  id: number;
+};
+
+interface AuthState {
+  accessToken: string | null;
+  refreshToken: string | null;
+  email: string | null;
+  name: string | null;
+  isLoggedIn: boolean;
+  isRegistered: boolean;
+  id: number | null;
+}
+
+const initialState: AuthState = {
+  accessToken: null,
+  refreshToken: null,
+  email: null,
+  name: null,
+  isLoggedIn: false,
+  isRegistered: false,
+  id: null,
+};
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {
-        login: (state, action: PayloadAction<LoginResponse>) => {
-            const { accessToken, refreshToken, email, name } = action.payload;
-            state.accessToken = accessToken;
-            state.refreshToken = refreshToken;
-            state.email = email;
-            state.name = name;
-            state.isLoggedIn = true;
-            state.isRegistered = true;
+  name: "auth",
+  initialState,
+  reducers: {
+    login: (state, action: PayloadAction<LoginResponse>) => {
+      const { accessToken, refreshToken, email, name, id } = action.payload;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
+      state.email = email;
+      state.name = name;
+      state.id = id;
+      state.isLoggedIn = true;
+      state.isRegistered = true;
+    },
 
-        },
+    register: (state, action: PayloadAction<RegisterResponse>) => {
+      const { email, name, id } = action.payload;
+      state.email = email;
+      state.name = name;
+      state.id = id;
+      state.isRegistered = true;
+    },
 
-        register: (state, action: PayloadAction<RegisterResponse>) => {
-            const { email, name } = action.payload;
-            state.email = email;
-            state.name = name;
-            state.isRegistered = true;
-        },
-
-        logOut: (state) => {
-            state.accessToken = null;
-            state.refreshToken = null;
-            state.isLoggedIn = false;
-            state.isRegistered = false;
-            state.name = null;
-        }
-    }
+    logOut: (state) => {
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.isLoggedIn = false;
+      state.isRegistered = false;
+      state.email = null;
+      state.name = null;
+      state.id = null;
+    },
+  },
 });
 
 export const { login, register, logOut } = authSlice.actions;

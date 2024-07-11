@@ -1,6 +1,10 @@
 import { RootState } from "@/lib/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+interface Liked {
+  trackId: number;
+  userId: number;
+}
 export const audioPlayerApi = createApi({
   reducerPath: "audioPlayerApi",
   baseQuery: fetchBaseQuery({
@@ -15,16 +19,24 @@ export const audioPlayerApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    likeTrack: builder.mutation<void, number>({
-      query: (trackId) => ({
+    likeTrack: builder.mutation<Liked, { trackId: number; userId: number }>({
+      query: ({ trackId, userId }) => ({
         url: `liked`,
         method: "POST",
-        body: { trackId },
+        body: { trackId, userId },
+      }),
+    }),
+
+    unlikeTrack: builder.mutation<object, { trackId: number; userId: number }>({
+      query: ({ trackId, userId }) => ({
+        url: `liked`,
+        method: "DELETE",
+        body: { trackId, userId },
       }),
     }),
   }),
 });
 
-export const { useLikeTrackMutation } = audioPlayerApi;
+export const { useLikeTrackMutation, useUnlikeTrackMutation } = audioPlayerApi;
 
 export default audioPlayerApi;
