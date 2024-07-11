@@ -5,6 +5,7 @@ import { AudioPlayerState, playPause } from '@/lib/features/audioPlayer/audioPla
 import { useAppDispatch, useAppSelector } from '@/lib/hook'
 import { RootState } from '@/lib/store'
 import Image from 'next/image'
+import Buttons from './Buttons'
 const Player = () => {
     const {
         isPlaying,
@@ -17,7 +18,9 @@ const Player = () => {
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
 
     const dispatch = useAppDispatch();
-
+    const updateVolume = (volume: number) => {
+        dispatch(playPause({ volume }));
+    }
 
     if (!activeSong) {
         return;
@@ -28,11 +31,16 @@ const Player = () => {
         fixed
         bottom-0
         left-0
-        bg-black
+        right-0 
+        bg-[#121212]/70
+        border-t
+        border-t-[#242424]
         w-full
-        py-2
-        h-[80px]
-        px-4'>
+        py-3
+        px-4
+        pb-4
+        h-[100px]
+        backdrop-blur-xl'>
             <div
                 className='
              flex
@@ -78,6 +86,14 @@ const Player = () => {
                 </div>
                 {/* controls */}
                 {/* button */}
+                <Buttons
+                    download_url={activeSong?.src || ""}
+                    song_id={activeSong!.id}
+                    updateVolume={updateVolume}
+                    showVolumeSeekbar
+                    volume={volume}
+                    className=''
+                />
             </div>
         </div>
     )
