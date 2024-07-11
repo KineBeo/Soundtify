@@ -13,6 +13,7 @@ import JwtAuthenticationGuard from 'src/guards/jwt-authentication.guard';
 import User from 'src/users/uses.entity';
 import LikedDto from './dto/liked.dto';
 import getLikedDto from './dto/getLiked.dto';
+import { likedTrackDto } from './dto/likedTracks.dto';
 
 @Controller('liked')
 export default class LikedController {
@@ -48,5 +49,12 @@ export default class LikedController {
   async checkLiked(@Body() dto: LikedDto) {
     const { trackId, userId } = dto;
     return this.likedService.checkLiked(trackId, userId);
+  }
+
+  @Get('liked-list')
+  @UseGuards(JwtAuthenticationGuard)
+  async getLikedTrackLis(@Body() dto: likedTrackDto) {
+    const { liked } = dto;
+    return this.likedService.getLikedTracks(liked);
   }
 }

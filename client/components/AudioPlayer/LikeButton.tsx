@@ -10,9 +10,9 @@ import {
     removeLike
 } from '@/lib/features/audioPlayer/audioPlayerSlice'
 import {
-    BiHeart,
-    BiSolidHeart
-} from 'react-icons/bi'
+    AiFillHeart
+    , AiOutlineHeart
+} from 'react-icons/ai'
 import {
     useLikeTrackMutation,
     useUnlikeTrackMutation
@@ -71,12 +71,12 @@ const LikeButton: React.FC<LikeButtonProps> = ({
             {!like
                 ? (<Tooltip content="Like">
                     <i onClick={handleLike}>
-                        <BiHeart size={size} />
+                        <AiOutlineHeart size={size} />
                     </i>
                 </Tooltip>)
                 : (<Tooltip content="unlike">
                     <i onClick={handleUnlike}>
-                        <BiSolidHeart className='text-[#2bb540]' size={size} />
+                        <AiFillHeart className='text-[#2bb540]' size={size} />
                     </i>
                 </Tooltip>)}
         </div >

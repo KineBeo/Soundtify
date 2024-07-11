@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
     const authState = useAppSelector(state => state.auth);
 
     const handleLogout = async () => {
-        // handle logout
+
         if (userEmail) {
             try {
                 await logout(userEmail).unwrap();

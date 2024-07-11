@@ -11,10 +11,10 @@ import Loading from "@/components/Loading";
 import { useHomePageData } from "@/lib/features/homePage/homePageApi";
 export default function Home() {
 
-  const { recentUsers: recentArtist, 
-    trendingArtists, 
-    topHits, 
-    popularHits, 
+  const { recentUsers: recentArtist,
+    trendingArtists,
+    topHits,
+    popularHits,
     status } = useHomePageData();
   return (
     <div>
@@ -50,7 +50,7 @@ export default function Home() {
               ">
               <ListItem image="/images/liked.png"
                 name="Liked Songs"
-                href="Liked"
+                href="liked"
               />
             </div>
           </div>

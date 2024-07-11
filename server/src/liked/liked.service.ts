@@ -3,12 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Liked } from './liked.entity';
 import { Repository } from 'typeorm';
 import User from 'src/users/uses.entity';
+import { Track } from 'src/track/track.entity';
+import { TrackService } from 'src/track/track.service';
 
 @Injectable()
 export class LikedService {
   constructor(
     @InjectRepository(Liked)
     private likedRepository: Repository<Liked>,
+    private readonly trackService: TrackService,
   ) {}
 
   async addLike(trackId: number, userId: number): Promise<Liked> {
@@ -59,6 +62,22 @@ export class LikedService {
       return count > 0;
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async getLikedTracks(listOfLikedTrackId: number[]): Promise<Track[]> {
+    try {
+      const likedTracks: Track[] = [];
+      for (const trackId of listOfLikedTrackId) {
+        const track = await this.trackService.getTrackById(trackId);
+        if (track) {
+          likedTracks.push(track);
+        }
+      }
+
+      return likedTracks;
+    } catch (error) {
+      console.log(error);
     }
   }
 }
