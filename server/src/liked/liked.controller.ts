@@ -51,7 +51,7 @@ export default class LikedController {
     return this.likedService.checkLiked(trackId, userId);
   }
 
-  @Get('liked-list')
+  @Post('liked-list')
   @UseGuards(JwtAuthenticationGuard)
   async getLikedTrackLis(@Body() dto: likedTrackDto) {
     const { liked } = dto;

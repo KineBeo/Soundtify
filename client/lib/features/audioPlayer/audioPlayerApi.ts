@@ -1,3 +1,4 @@
+import Track from "@/interfaces/track";
 import { RootState } from "@/lib/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -34,9 +35,21 @@ export const audioPlayerApi = createApi({
         body: { trackId, userId },
       }),
     }),
+
+    getLikedTracks: builder.mutation<Track[], number[]>({
+      query: (liked) => ({
+        url: `liked/liked-list`,
+        method: "POST",
+        body: { liked },
+      }),
+    }),
   }),
 });
 
-export const { useLikeTrackMutation, useUnlikeTrackMutation } = audioPlayerApi;
+export const {
+  useLikeTrackMutation,
+  useUnlikeTrackMutation,
+  useGetLikedTracksMutation,
+} = audioPlayerApi;
 
 export default audioPlayerApi;

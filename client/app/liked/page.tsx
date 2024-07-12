@@ -1,7 +1,29 @@
+'use client'
 import Header from '@/components/Header';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
+import LikedSongList from '@/components/AudioPlayer/LikedSongList';
+import { useAppSelector } from '@/lib/hook';
+import { RootState } from '@/lib/store';
+import { useGetLikedTracksMutation } from '@/lib/features/audioPlayer/audioPlayerApi';
+import Track from '@/interfaces/track';
 const Liked = () => {
+    const { liked } = useAppSelector((state: RootState) => state.audioPlayer);
+    const [getLikedTracks] = useGetLikedTracksMutation();
+    const [songs, setSongs] = useState<Track[]>([]);
+
+    useEffect(() => {
+        const fetchSongs = async () => {
+            try {
+                const result = await getLikedTracks(liked).unwrap();
+                setSongs(result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchSongs();
+    }, [getLikedTracks, liked]);
     return (
         <div
             className='
@@ -42,7 +64,7 @@ const Liked = () => {
                         mt-4
                         md:mt-0
                         '>
-                            <p className='hidden md:block font-semibold text-sm'>
+                            <p className='hidden md:block font-semibold text-lg'>
                                 Playlist
                             </p>
                             <div className='
@@ -57,7 +79,7 @@ const Liked = () => {
                     </div>
                 </div>
             </Header>
-            {/* <LikedSongList songs={songs} /> */}
+            <LikedSongList songs={songs} />
         </div>
     )
 }
