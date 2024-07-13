@@ -1,5 +1,5 @@
 import Reactt from 'react'
-import { BiShuffle } from 'react-icons/bi';
+import { BiShuffle, BiRepeat } from 'react-icons/bi';
 import { BiPlay, BiPause } from 'react-icons/bi';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
 import Button from '../Button';
@@ -27,7 +27,11 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
     return (
         <div className='flex flex-row justify-center items-center mb-2 sm:justify-end gap-6 xl:gap-8'>
             <div className='flex flex-col items-center'>
-                BiShuffle
+                <BiShuffle className='cursor-pointer 
+                text-gray-300 
+                text-[30px] 
+                hover:text-white
+                hover:scale-110' />
             </div>
 
             {/* previous song */}
@@ -36,7 +40,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 cursor-pointer 
                 text-gray-300 
                 text-[30px] 
-                hover:text-white '
+                hover:text-white
+                hover:scale-110'
                 onClick={(e) => {
                     e.stopPropagation();
                     prevSong();
@@ -62,9 +67,9 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 }}>
                 {!isPlaying
                     ?
-                    <BiPlay className='text-[32px] ml-0.5' />
+                    <BiPlay className='text-[34px] ml-0.5' />
                     :
-                    <BiPause className='text-[32px]' />}
+                    <BiPause className='text-[34px]' />}
             </Button>
             {/* next song */}
             <i
@@ -72,7 +77,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 cursor-pointer 
                 text-gray-300 
                 hover:text-white
-                text-[30px] 
+                text-[30px]
+                hover:scale-110 
                 '
                 onClick={(e) => {
                     e.stopPropagation();
@@ -82,7 +88,12 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 <AiFillStepForward />
             </i>
             <div className='flex flex-col items-center'>
-                BiShuffle
+                <BiRepeat className='
+                cursor-pointer 
+                text-gray-300 
+                text-[30px] 
+                hover:text-white
+                hover:scale-110'/>
             </div>
         </div>
     )

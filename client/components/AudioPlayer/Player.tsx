@@ -42,7 +42,10 @@ const Player = () => {
         py-3
         px-4
         pb-4
-        h-[100px]
+        h-[120px]
+        flex 
+        flex-col
+        justify-center
         backdrop-blur-xl'>
             <div
                 className='
