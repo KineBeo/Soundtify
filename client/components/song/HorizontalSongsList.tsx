@@ -38,7 +38,6 @@ const HorizontalSongsList: React.FC<HorizontalSongsListProps> = ({
                     }}
                 />
             ))}
-
         </div>
     )
 }

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hook'
 import { RootState } from '@/lib/store'
 import Image from 'next/image'
 import Buttons from './Buttons'
+import ControlCenter from './ControlCenter'
 const Player = () => {
     const {
         isPlaying,
@@ -16,8 +17,9 @@ const Player = () => {
         isShuffle,
         isRepeat,
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
-    const { id } = useAppSelector((state: RootState) => state.auth);
     const dispatch = useAppDispatch();
+
+    const { id } = useAppSelector((state: RootState) => state.auth);
     const updateVolume = (volume: number) => {
         dispatch(playPause({ volume }));
     }
@@ -25,6 +27,7 @@ const Player = () => {
     if (!activeSong) {
         return;
     }
+
     return (
         <div
             className='
@@ -85,6 +88,19 @@ const Player = () => {
 
                 </div>
                 {/* controls */}
+                <div className=''>
+                    <ControlCenter
+                        isPlaying={isPlaying}
+                        isFullScreen={false}
+                        isRepeat={isRepeat}
+                        isShuffle={isShuffle}
+                        nextSong={() => { }}
+                        prevSong={() => { }}
+                        onRepeat={() => { }}
+                        playPause={() => { }}
+                    >
+                    </ControlCenter>
+                </div>
                 {/* button */}
                 <Buttons
                     user_id={id ? id : 0}

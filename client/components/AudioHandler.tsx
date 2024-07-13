@@ -1,6 +1,7 @@
 'use client'
 import {
     AudioPlayerState,
+    nextSong,
     playPause
 } from "@/lib/features/audioPlayer/audioPlayerSlice";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
@@ -27,6 +28,13 @@ function AudioHandler() {
     const audioRef = useRef<Howl | null>(null);
     const isReady = useRef(false);
 
+    const toNextSong = () => {
+        if (isShuffle) {
+            dispatch(nextSong(Math.floor(Math.random() * songs.length)));
+        } else if (songs.length - 1 !== currentIndex) {
+            dispatch(nextSong(currentIndex + 1));
+        }
+    }
     useEffect(() => {
         if (isPlaying) {
             if (audioRef.current) {
@@ -41,6 +49,7 @@ function AudioHandler() {
 
     useEffect(() => {
         if (!activeSong) {
+            console.log("Pause");
             return;
         }
 
@@ -69,6 +78,15 @@ function AudioHandler() {
         }
     }, [activeSong, currentIndex]);
 
+    useEffect(() => {
+        dispatch(playPause(false));
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+            }
+        }
+    }, [])
     return <></>
 }
 
