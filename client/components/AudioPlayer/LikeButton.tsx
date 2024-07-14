@@ -65,7 +65,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
                 isList ?
                     like
                         ? "visible"
-                        : "invisible group-hover:visible mobile:visible tablet:visible" : undefined
+                        : "invisible group-hover:visible" : undefined
             }
         >
             {!like

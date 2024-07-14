@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-
+import { NextUIProvider } from '@nextui-org/react'
 export default function StoreProvider({
     children,
 }: {
@@ -21,10 +21,12 @@ export default function StoreProvider({
     persistor.persist();
 
     return (
-        <Provider store={storeRef.current}>
-            <PersistGate loading={<Loading />} persistor={persistStore(storeRef.current)}>
-                {children}
-            </PersistGate>
-        </Provider>
+        <NextUIProvider>
+            <Provider store={storeRef.current}>
+                <PersistGate loading={<Loading />} persistor={persistStore(storeRef.current)}>
+                    {children}
+                </PersistGate>
+            </Provider>
+        </NextUIProvider>
     );
 };

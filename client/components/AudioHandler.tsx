@@ -2,7 +2,9 @@
 import {
     AudioPlayerState,
     nextSong,
-    playPause
+    playPause,
+    setCurrentTime,
+    setDuration
 } from "@/lib/features/audioPlayer/audioPlayerSlice";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
 import { RootState } from "@/lib/store";
@@ -27,14 +29,24 @@ function AudioHandler() {
     const dispatch = useAppDispatch();
     const audioRef = useRef<Howl | null>(null);
     const isReady = useRef(false);
+    const requestRef = useRef<number | null>(null);
 
-    const toNextSong = () => {
-        if (isShuffle) {
-            dispatch(nextSong(Math.floor(Math.random() * songs.length)));
-        } else if (songs.length - 1 !== currentIndex) {
-            dispatch(nextSong(currentIndex + 1));
+    const animate = () => {
+        if (audioRef.current) {
+            dispatch(setCurrentTime(audioRef.current?.seek() || 0));
+            requestRef.current = requestAnimationFrame(animate);
         }
     }
+
+    const handlePlay = () => {
+        requestRef.current = requestAnimationFrame(animate);
+    }
+
+    const handlePause = () => {
+        cancelAnimationFrame(requestRef.current!);
+    }
+
+
     useEffect(() => {
         if (isPlaying) {
             if (audioRef.current) {
@@ -45,11 +57,39 @@ function AudioHandler() {
                 audioRef.current.pause();
             }
         }
+
+        return () => cancelAnimationFrame(requestRef.current!);
     }, [isPlaying]);
+
+    const toNextSong = () => {
+        if (isShuffle) {
+            dispatch(nextSong(Math.floor(Math.random() * songs.length)));
+        } else if (songs.length - 1 !== currentIndex) {
+            dispatch(nextSong(currentIndex + 1));
+        }
+    }
+
+    const handleLoad = () => {
+        if (audioRef.current) {
+            dispatch(setDuration(audioRef.current.duration()));
+        }
+    }
+    // useEffect Repeat here
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume(volume);
+        }
+    }, [volume]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.seek(seekTime);
+        }
+    }, [seekTime]);
 
     useEffect(() => {
         if (!activeSong) {
-            console.log("Pause");
             return;
         }
 
@@ -58,10 +98,12 @@ function AudioHandler() {
         }
 
         audioRef.current = new Howl({
-            src: activeSong?.src ? [activeSong.src] : [],
-            html5: true,
-            // onplay: handlePlay,
-            // onpause: handlePause,
+            src: [activeSong!.src],
+            onend: toNextSong,
+            onload: handleLoad,
+            onplay: handlePlay,
+            onpause: handlePause,
+            volume: volume,
         });
 
         if (isReady.current) {
@@ -75,16 +117,22 @@ function AudioHandler() {
             if (audioRef.current) {
                 audioRef.current.pause();
             }
-        }
+
+            cancelAnimationFrame(requestRef.current!);
+        };
     }, [activeSong, currentIndex]);
 
     useEffect(() => {
         dispatch(playPause(false));
 
+        if (audioRef.current) {
+            audioRef.current.seek(currentTime)
+        }
         return () => {
             if (audioRef.current) {
                 audioRef.current.pause();
             }
+            cancelAnimationFrame(requestRef.current!);
         }
     }, [])
     return <></>

@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 import { AudioPlayerState, playPause } from '@/lib/features/audioPlayer/audioPlayerSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/hook'
@@ -7,6 +6,7 @@ import { RootState } from '@/lib/store'
 import Image from 'next/image'
 import Buttons from './Buttons'
 import ControlCenter from './ControlCenter'
+import SeekBar from './SeekBar'
 const Player = () => {
     const {
         isPlaying,
@@ -103,6 +103,8 @@ const Player = () => {
                         playPause={() => { }}
                     >
                     </ControlCenter>
+
+                    <SeekBar />
                 </div>
                 {/* button */}
                 <Buttons
