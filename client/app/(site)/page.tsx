@@ -1,14 +1,11 @@
 'use client'
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
-import { HomePageState, RequestStatus } from "@/lib/features/homePage/homePageSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hook";
+import { RequestStatus } from "@/lib/features/homePage/homePageSlice";
 import HorizontalSongsList from "@/components/song/HorizontalSongsList";
-import { RootState } from "@/lib/store";
-// import { getHomePageData } from "@/lib/features/homePage/homePageApi";
 import HorizontalArtistList from "@/components/artist/HorizontalArtistList";
 import Loading from "@/components/Loading";
-import { useHomePageData } from "@/lib/features/homePage/homePageApi";
+import { useHomePageData } from "@/lib/features/homePage/homePageData";
 export default function Home() {
 
   const { recentUsers: recentArtist,

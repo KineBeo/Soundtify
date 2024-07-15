@@ -1,7 +1,6 @@
 import Artist from "@/interfaces/artist";
 import Track from "@/interfaces/track";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchArtists, fetchTracks } from "./homePageThunk";
 export enum RequestStatus {
   Loading,
   Error,
@@ -38,31 +37,6 @@ const homePageSlice = createSlice({
     setError: (state) => {
       state.status = RequestStatus.Error;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchTracks.pending, (state) => {
-        state.status = RequestStatus.Loading;
-      })
-      .addCase(fetchTracks.fulfilled, (state, action) => {
-        state.topHits = action.payload?.slice(0, 6);
-        state.popularHits = action.payload?.slice(7, 10);
-        state.status = RequestStatus.Success;
-      })
-      .addCase(fetchTracks.rejected, (state) => {
-        state.status = RequestStatus.Error;
-      })
-      .addCase(fetchArtists.pending, (state) => {
-        state.status = RequestStatus.Loading;
-      })
-      .addCase(fetchArtists.fulfilled, (state, action) => {
-        state.recentUsers = action.payload?.slice(0, 6);
-        state.trendingArtists = action.payload?.slice(7, 10);
-        state.status = RequestStatus.Success;
-      })
-      .addCase(fetchArtists.rejected, (state) => {
-        state.status = RequestStatus.Error;
-      });
   },
 });
 

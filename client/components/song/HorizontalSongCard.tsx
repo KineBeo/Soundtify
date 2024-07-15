@@ -2,10 +2,10 @@ import React from "react";
 import Artist from "@/interfaces/artist";
 import Track from "@/interfaces/track";
 import Image from "next/image";
-import Link from "next/link";
 import PlayPauseButton from "../PlayPauseButton";
 import { useAppSelector } from "@/lib/hook";
 import { RootState } from "@/lib/store";
+import { getAllArtists } from "@/lib/features/artist/getAllArtists";
 interface HorizontalSongCardProps {
     song: Track
     onClick: () => void;
@@ -14,6 +14,7 @@ interface HorizontalSongCardProps {
 function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
 
     const { activeSong, isPlaying } = useAppSelector((state: RootState) => state.audioPlayer);
+    const artists = getAllArtists();
     return (
         <div
             className="
@@ -58,37 +59,23 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                 <p className="font-semibold truncate w-full">
                     {song.track_name}
                 </p>
-                {/* <p className="
+                <p className="
                 text-neutral-400
                 text-sm
                 pb-4
                 w-full
                 truncate
                 ">
-                    By {artists}
-                </p> */}
+                    {artists?.find((artist: Artist) => artist.id === song.user_id)?.username || "Unknown Artist"}
+                </p>
             </div>
             <div className="
             absolute
-            bottom-24
-            right-5">
+            bottom-14
+            right-4">
                 <PlayPauseButton
                     isPlaying={(activeSong?.id === song.id) && isPlaying} />
             </div>
-            {/* <p className="line-clamp-2 mt-0.5 text-sm text-gray-400 sm:text-xs md:text-xs">
-                    {artists.map((artist: Artist, index: number) => (
-                        <React.Fragment key={artist.id}>
-                            <Link
-                                href={`/artist/${artist.id}`}
-                                className="text-gray-300 text-sm"
-                            >
-                                {artist.username}
-                            </Link>
-                            {index < artists.length - 1 && ", "}
-                        </React.Fragment>
-                    ))}
-                </p> */}
-
         </div>
     );
 }

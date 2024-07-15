@@ -1,12 +1,13 @@
 'use client'
 import React from 'react'
-import { AudioPlayerState, playPause } from '@/lib/features/audioPlayer/audioPlayerSlice'
+import { AudioPlayerState, nextSong, playPause } from '@/lib/features/audioPlayer/audioPlayerSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/hook'
 import { RootState } from '@/lib/store'
 import Image from 'next/image'
 import Buttons from './Buttons'
 import ControlCenter from './ControlCenter'
 import SeekBar from './SeekBar'
+import { getAllArtists } from '@/lib/features/artist/getAllArtists'
 const Player = () => {
     const {
         isPlaying,
@@ -18,10 +19,28 @@ const Player = () => {
         isRepeat,
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
     const dispatch = useAppDispatch();
-
     const { id } = useAppSelector((state: RootState) => state.auth);
+    const artists = getAllArtists();
     const updateVolume = (volume: number) => {
         dispatch(playPause({ volume }));
+    }
+
+    const toNextSong = () => {
+        if (isShuffle) {
+            const randomIndex = Math.floor(Math.random() * songs.length);
+            dispatch(nextSong(randomIndex));
+        } else if (songs.length - 1 != currentIndex) {
+            dispatch(nextSong(currentIndex + 1));
+        }
+    }
+
+    const toPrevSong = () => {
+        if (isShuffle) {
+            const randomIndex = Math.floor(Math.random() * songs.length);
+            dispatch(nextSong(randomIndex));
+        } else if (currentIndex != 0) {
+            dispatch(nextSong(currentIndex - 1));
+        }
     }
 
     if (!activeSong) {
@@ -85,7 +104,7 @@ const Player = () => {
                             {activeSong.track_name}
                         </p>
                         <p>
-                            artist
+                            By {artists?.find((artist) => artist.id === activeSong.user_id)?.username}
                         </p>
                     </div>
 
@@ -97,10 +116,10 @@ const Player = () => {
                         isFullScreen={false}
                         isRepeat={isRepeat}
                         isShuffle={isShuffle}
-                        nextSong={() => { }}
-                        prevSong={() => { }}
+                        nextSong={() => { toNextSong() }}
+                        prevSong={() => { toPrevSong() }}
                         onRepeat={() => { }}
-                        playPause={() => { }}
+                        playPause={() => { dispatch(playPause(!isPlaying)) }}
                     >
                     </ControlCenter>
 
