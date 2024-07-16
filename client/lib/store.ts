@@ -10,8 +10,6 @@ import {
 } from "redux-persist";
 import { authApi } from "./features/auth/authApi";
 import authReducer from "./features/auth/authSlice";
-// import { trackApi } from "./features/track/trackApi";
-// import { artistApi } from "./features/artist/artistApi";
 import homePageReducer from "./features/homePage/homePageSlice";
 import audioPlayerReducer from "./features/audioPlayer/audioPlayerSlice";
 import localStorage from "redux-persist/es/storage";

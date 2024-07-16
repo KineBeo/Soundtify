@@ -21,14 +21,9 @@ interface LikeButtonProps {
     user_id: number,
     song_id: number,
     size: number,
-    isList: boolean
+    isList: any
 }
-const LikeButton: React.FC<LikeButtonProps> = ({
-    user_id,
-    song_id,
-    size,
-    isList
-}) => {
+function LikeButton({ user_id, song_id, size, isList }: any) {
     const [like, setLike] = useState(false);
     const dispatch = useAppDispatch();
     const { liked } = useAppSelector(state => state.audioPlayer);
@@ -63,9 +58,9 @@ const LikeButton: React.FC<LikeButtonProps> = ({
         <div
             className={
                 isList ?
-                    like
+                    (like
                         ? "visible"
-                        : "invisible group-hover:visible" : undefined
+                        : "invisible group-hover:visible") : undefined
             }
         >
             {!like

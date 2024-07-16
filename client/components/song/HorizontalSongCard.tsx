@@ -50,6 +50,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                     alt="song cover image"
                     width={200}
                     height={200}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="w-full h-full rounded object-cover"
                 />
             </div>
@@ -71,7 +72,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
             </div>
             <div className="
             absolute
-            bottom-14
+            bottom-24
             right-4">
                 <PlayPauseButton
                     isPlaying={(activeSong?.id === song.id) && isPlaying} />

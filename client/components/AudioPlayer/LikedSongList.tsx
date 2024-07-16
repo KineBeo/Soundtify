@@ -45,7 +45,7 @@ const LikedSongList: React.FC<LikedSongListProps> = ({
                         <div className='flex-1'>
                             <MediaItem song={song} />
                         </div>
-                        <LikeButton user_id={id || 0} song_id={activeSong?.id || 0} size={25} isList={false} />
+                        <LikeButton user_id={id || 0} song_id={activeSong?.id || 0} size={25} isList={true} />
 
                     </div>
                 ))
