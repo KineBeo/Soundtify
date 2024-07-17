@@ -25,7 +25,7 @@ const HorizontalArtistCard: React.FC<HorizontalArtistCardProps> = ({
             gap-x-4
             bg-neutral-400/5
             cursor-pointer
-            hover:bg-neutral-400/10
+            hover:bg-neutral-400/20
             transition
             p-3"
             onClick={onClick}
@@ -63,20 +63,6 @@ const HorizontalArtistCard: React.FC<HorizontalArtistCardProps> = ({
             bottom-24
             right-5">
             </div>
-            {/* <p className="line-clamp-2 mt-0.5 text-sm text-gray-400 sm:text-xs md:text-xs">
-                    {artists.map((artist: Artist, index: number) => (
-                        <React.Fragment key={artist.id}>
-                            <Link
-                                href={`/artist/${artist.id}`}
-                                className="text-gray-300 text-sm"
-                            >
-                                {artist.username}
-                            </Link>
-                            {index < artists.length - 1 && ", "}
-                        </React.Fragment>
-                    ))}
-                </p> */}
-
         </div>
     )
 }

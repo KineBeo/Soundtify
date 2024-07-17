@@ -29,7 +29,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
             gap-x-4
             bg-neutral-400/5
             cursor-pointer
-            hover:bg-neutral-400/10
+            hover:bg-neutral-400/20
             transition
             p-3"
             onClick={onClick}
