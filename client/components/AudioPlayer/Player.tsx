@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AudioPlayerState, nextSong, playPause } from '@/lib/features/audioPlayer/audioPlayerSlice'
+import { AudioPlayerState, nextSong, playPause, setVolume } from '@/lib/features/audioPlayer/audioPlayerSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/hook'
 import { RootState } from '@/lib/store'
 import Image from 'next/image'
@@ -21,8 +21,8 @@ const Player = () => {
     const dispatch = useAppDispatch();
     const { id } = useAppSelector((state: RootState) => state.auth);
     const artists = getAllArtists();
-    const updateVolume = (volume: number) => {
-        dispatch(playPause({ volume }));
+    const updateVolume = (volume: any) => {
+        dispatch(setVolume(volume));
     }
 
     const toNextSong = () => {
@@ -90,7 +90,10 @@ const Player = () => {
                     h-full
                     relative
                     cursor-pointer
-                    rounded'
+                    rounded
+                    transition
+                    scale-100
+                    hover:scale-110'
                             alt={""}
                             src={activeSong.cover_image?.url || "/images/liked.png"}
                             width={100}
@@ -104,7 +107,7 @@ const Player = () => {
                             {activeSong.track_name}
                         </p>
                         <p>
-                            By {artists?.find((artist) => artist.id === activeSong.user_id)?.username}
+                            {artists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
                         </p>
                     </div>
 
