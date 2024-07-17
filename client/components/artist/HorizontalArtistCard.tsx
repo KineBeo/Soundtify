@@ -53,15 +53,18 @@ const HorizontalArtistCard: React.FC<HorizontalArtistCardProps> = ({
                 className="flex flex-col items-start w-full pt-4 gap-y-1"
             >
                 <p className="font-semibold truncate w-full">
-                    {/* {artist.display_name} */}
-                    {artist.username}
+                    {artist.display_name}
+                </p>
+                <p className="
+                text-neutral-400
+                text-md
+                pb-4
+                w-full
+                truncate
+                ">
+                    Artist
                 </p>
 
-            </div>
-            <div className="
-            absolute
-            bottom-24
-            right-5">
             </div>
         </div>
     )

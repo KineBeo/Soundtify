@@ -62,7 +62,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                 </p>
                 <p className="
                 text-neutral-400
-                text-sm
+                text-md
                 pb-4
                 w-full
                 truncate

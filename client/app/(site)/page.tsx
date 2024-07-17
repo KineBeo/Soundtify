@@ -55,7 +55,7 @@ export default function Home() {
         <div className="mt-2 mb-7 px-6">
 
           <div className="pt-10 lg:pt-2 sm:pt-1 md:pt-2">
-            <div className="mt-12">
+            <div className="mt-3">
               <div className="text-2xl mb-6 font-semibold">
                 Artist
               </div>
