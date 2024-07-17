@@ -133,7 +133,8 @@ const audioPLayerSlice = createSlice({
     },
 
     toggleModal: (state, action) => {
-      // not sure what is this
+      state.isModalOpen = action.payload.data;
+      state.passedDataToModal = action.payload;
     },
 
     setVolume: (state, action) => {

@@ -42,7 +42,7 @@ const Buttons: React.FC<ButtonsProps> = ({
                         <BiDownload size={25} />
                     </i>
                 </Tooltip>
-                {showVolumeSeekbar && (<VolumeControl volume={volume} updateVolume={updateVolume} size={26} />)}
+                {showVolumeSeekbar && (<VolumeControl volume={volume} updateVolume={updateVolume} size={26} isFullScreen={false} />)}
             </div>
         </div>
     )

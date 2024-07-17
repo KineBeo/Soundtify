@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { AudioPlayerState, nextSong, playPause, setVolume } from '@/lib/features/audioPlayer/audioPlayerSlice'
 import { useAppDispatch, useAppSelector } from '@/lib/hook'
 import { RootState } from '@/lib/store'
@@ -8,6 +8,7 @@ import Buttons from './Buttons'
 import ControlCenter from './ControlCenter'
 import SeekBar from './SeekBar'
 import { getAllArtists } from '@/lib/features/artist/getAllArtists'
+import PlayingModal from '../Playing'
 const Player = () => {
     const {
         isPlaying,
@@ -24,6 +25,7 @@ const Player = () => {
     const updateVolume = (volume: any) => {
         dispatch(setVolume(volume));
     }
+    const [isOpenPlayingModal, setOpenPlayingModal] = useState(false);
 
     const toNextSong = () => {
         if (isShuffle) {
@@ -48,8 +50,10 @@ const Player = () => {
     }
 
     return (
-        <div
-            className='
+        <>
+            <PlayingModal isOpen={isOpenPlayingModal} handleClose={() => setOpenPlayingModal(false)} />
+            <div
+                className='
         fixed
         bottom-0
         left-0
@@ -66,25 +70,26 @@ const Player = () => {
         flex-col
         justify-center
         backdrop-blur-xl'>
-            <div
-                className='
+                <div
+                    className='
              flex
              flex-row 
              items-center
              justify-between
              w-screen 
              max-w-full'>
-                <div className='
-                flex flex-row items-center w-full cursor-pointer'>
-                    <div
-                        className='
+                    <div className='
+                flex flex-row items-center w-full cursor-pointer'
+                        onClick={() => setOpenPlayingModal(!isOpenPlayingModal)}>
+                        <div
+                            className='
                     w-[50px]
                     h-[50px]
                 min-w-[50px]
                 relative
                 cursor-pointer
                 rounded'>
-                        <Image className='
+                            <Image className='
                     object-cover
                     w-full
                     h-full
@@ -94,52 +99,54 @@ const Player = () => {
                     transition
                     scale-100
                     hover:scale-110'
-                            alt={""}
-                            src={activeSong.cover_image?.url || "/images/liked.png"}
-                            width={100}
-                            height={100}
-                        />
+                                alt={""}
+                                src={activeSong.cover_image?.url || "/images/liked.png"}
+                                width={100}
+                                height={100}
+                            />
+
+                        </div>
+                        <div className='mx-4'>
+                            <p
+                                className='text-gray-300 cursor-pointer line-clamp-1'>
+                                {activeSong.track_name}
+                            </p>
+                            <p>
+                                {artists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
+                            </p>
+                        </div>
 
                     </div>
-                    <div className='mx-4'>
-                        <p
-                            className='text-gray-300 cursor-pointer line-clamp-1'>
-                            {activeSong.track_name}
-                        </p>
-                        <p>
-                            {artists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
-                        </p>
+                    {/* controls */}
+                    <div className=''>
+                        <ControlCenter
+                            isPlaying={isPlaying}
+                            isFullScreen={false}
+                            isRepeat={isRepeat}
+                            isShuffle={isShuffle}
+                            nextSong={() => { toNextSong() }}
+                            prevSong={() => { toPrevSong() }}
+                            onRepeat={() => { }}
+                            playPause={() => { dispatch(playPause(!isPlaying)) }}
+                        >
+                        </ControlCenter>
+
+                        <SeekBar />
                     </div>
-
+                    {/* button */}
+                    <Buttons
+                        user_id={id ? id : 0}
+                        download_url={activeSong?.src || ""}
+                        song_id={activeSong!.id}
+                        updateVolume={updateVolume}
+                        showVolumeSeekbar
+                        volume={volume}
+                        className=''
+                    />
                 </div>
-                {/* controls */}
-                <div className=''>
-                    <ControlCenter
-                        isPlaying={isPlaying}
-                        isFullScreen={false}
-                        isRepeat={isRepeat}
-                        isShuffle={isShuffle}
-                        nextSong={() => { toNextSong() }}
-                        prevSong={() => { toPrevSong() }}
-                        onRepeat={() => { }}
-                        playPause={() => { dispatch(playPause(!isPlaying)) }}
-                    >
-                    </ControlCenter>
-
-                    <SeekBar />
-                </div>
-                {/* button */}
-                <Buttons
-                    user_id={id ? id : 0}
-                    download_url={activeSong?.src || ""}
-                    song_id={activeSong!.id}
-                    updateVolume={updateVolume}
-                    showVolumeSeekbar
-                    volume={volume}
-                    className=''
-                />
             </div>
-        </div>
+        </>
+
     )
 }
 

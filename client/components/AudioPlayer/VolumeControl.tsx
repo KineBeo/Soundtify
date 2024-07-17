@@ -4,11 +4,13 @@ import { BiVolumeLow, BiVolumeFull, BiVolumeMute } from 'react-icons/bi';
 interface VolumeControlProps {
     volume: number
     updateVolume: (volume: any) => void
+    isFullScreen: boolean
     size: number
 }
 const VolumeControl: React.FC<VolumeControlProps> = ({
     volume,
     updateVolume,
+    isFullScreen,
     size
 }) => {
     const currentPercent = 1 ? `${(volume / 1) * 100}%` : '0%';

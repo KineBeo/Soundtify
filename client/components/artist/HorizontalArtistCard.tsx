@@ -46,7 +46,7 @@ const HorizontalArtistCard: React.FC<HorizontalArtistCardProps> = ({
                     alt="artist cover image"
                     width={200}
                     height={200}
-                    className="w-full h-full rounded object-cover"
+                    className="w-full h-full rounded-full object-cover"
                 />
             </div>
             <div
