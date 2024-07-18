@@ -34,7 +34,7 @@ const Liked = () => {
         overflow-hidden
         overflow-y-auto
         '>
-            <Header >
+            <Header bgColor=''>
                 <div className='mt-20'>
                     <div className='
                         flex

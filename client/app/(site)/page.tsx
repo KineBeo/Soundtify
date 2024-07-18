@@ -25,7 +25,7 @@ export default function Home() {
           overflow-hidden
           overflow-y-auto
         " >
-        <Header>
+        <Header bgColor="">
           <div className="mb-2">
             <h1
               className="

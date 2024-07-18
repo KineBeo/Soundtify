@@ -2,6 +2,7 @@
 import Artist from '@/interfaces/artist'
 import React from 'react'
 import HorizontalArtistCard from './HorizontalArtistCard';
+import { useRouter } from 'next/navigation';
 
 interface HorizontalArtistListProps {
     artists: Artist[];
@@ -10,6 +11,8 @@ interface HorizontalArtistListProps {
 const HorizontalArtistList: React.FC<HorizontalArtistListProps> = ({
     artists
 }) => {
+
+    const router = useRouter();
     return (
         <div
             className='
@@ -28,7 +31,7 @@ const HorizontalArtistList: React.FC<HorizontalArtistListProps> = ({
                     key={artist.id}
                     artist={artist}
                     onClick={() => {
-                        // change router here
+                        router.push(`/artist/${artist.id}`);
                     }}
                 />
             ))}

@@ -26,6 +26,8 @@ export const useHomePageData = () => {
             trendingArtists: artists.slice(10, 20),
             topHits: tracks.slice(0, 10),
             popularHits: tracks.slice(7, 10),
+            allArtists: artists,
+            allTracks: tracks,
           })
         );
       } catch (error) {

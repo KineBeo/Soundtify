@@ -9,6 +9,7 @@ import ControlCenter from './ControlCenter'
 import SeekBar from './SeekBar'
 import { getAllArtists } from '@/lib/features/artist/getAllArtists'
 import PlayingModal from '../Playing'
+import { HomePageState } from '@/lib/features/homePage/homePageSlice'
 const Player = () => {
     const {
         isPlaying,
@@ -19,9 +20,9 @@ const Player = () => {
         isShuffle,
         isRepeat,
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
+    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     const dispatch = useAppDispatch();
     const { id } = useAppSelector((state: RootState) => state.auth);
-    const artists = getAllArtists();
     const updateVolume = (volume: any) => {
         dispatch(setVolume(volume));
     }
@@ -112,7 +113,7 @@ const Player = () => {
                                 {activeSong.track_name}
                             </p>
                             <p>
-                                {artists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
+                                {allArtists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
                             </p>
                         </div>
 

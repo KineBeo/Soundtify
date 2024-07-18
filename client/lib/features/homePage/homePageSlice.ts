@@ -13,6 +13,8 @@ export interface HomePageState {
   trendingArtists: Artist[] | undefined;
   topHits: Track[] | undefined;
   popularHits: Track[] | undefined;
+  allArtists: Artist[] | undefined;
+  allTracks: Track[] | undefined;
   status: RequestStatus;
 }
 
@@ -21,6 +23,8 @@ const initialState: HomePageState = {
   trendingArtists: [],
   topHits: [],
   popularHits: [],
+  allArtists: [],
+  allTracks: [],
   status: RequestStatus.Initial,
 };
 

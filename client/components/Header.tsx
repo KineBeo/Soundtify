@@ -13,11 +13,13 @@ import Button from './Button';
 interface HeaderProps {
     children: React.ReactNode;
     className?: string;
+    bgColor?: string | undefined;
 
 }
 const Header: React.FC<HeaderProps> = ({
     children,
-    className
+    className,
+    bgColor
 }) => {
 
     const [logout] = useLogoutMutation();
@@ -45,11 +47,12 @@ const Header: React.FC<HeaderProps> = ({
     }
     return (
         <div className={twMerge(`
-            h-fit
-            bg-gradient-to-b
-            from-emerald-800
-            p-6
-        `, className)}>
+        h-fit
+        bg-gradient-to-b
+        from-emerald-800
+        p-6
+      `, className)}
+            style={bgColor ? { backgroundColor: bgColor } : {}}>
             <div className='
                 w-full
                 mb-4

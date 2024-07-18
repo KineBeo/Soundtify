@@ -5,7 +5,7 @@ import Image from "next/image";
 import PlayPauseButton from "../PlayPauseButton";
 import { useAppSelector } from "@/lib/hook";
 import { RootState } from "@/lib/store";
-import { getAllArtists } from "@/lib/features/artist/getAllArtists";
+import { HomePageState } from "@/lib/features/homePage/homePageSlice";
 interface HorizontalSongCardProps {
     song: Track
     onClick: () => void;
@@ -14,7 +14,7 @@ interface HorizontalSongCardProps {
 function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
 
     const { activeSong, isPlaying } = useAppSelector((state: RootState) => state.audioPlayer);
-    const artists = getAllArtists();
+    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     return (
         <div
             className="
@@ -67,13 +67,13 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                 w-full
                 truncate
                 ">
-                    {artists?.find((artist: Artist) => artist.id === song.user_id)?.username || "Unknown Artist"}
+                    {allArtists?.find((artist: Artist) => artist.id === song.user_id)?.username || "Unknown Artist"}
                 </p>
             </div>
             <div className="
             absolute
             bottom-24
-            right-4">
+            right-5">
                 <PlayPauseButton
                     isPlaying={(activeSong?.id === song.id) && isPlaying} />
             </div>

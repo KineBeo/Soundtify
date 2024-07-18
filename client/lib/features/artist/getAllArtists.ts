@@ -1,3 +1,4 @@
+"use client";
 import Artist from "@/interfaces/artist";
 import { useEffect, useState } from "react";
 import { useGetAllArtistMutation } from "./artistApi";

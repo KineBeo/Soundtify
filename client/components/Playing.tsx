@@ -10,6 +10,7 @@ import VolumeControl from './AudioPlayer/VolumeControl';
 import { BiChevronDown } from 'react-icons/bi';
 import { BiDownload } from 'react-icons/bi';
 import Image from 'next/image';
+import { RootState } from '@/lib/store';
 export default function Playing({ isOpen, handleClose }: any) {
     const {
         isPlaying,
@@ -19,7 +20,7 @@ export default function Playing({ isOpen, handleClose }: any) {
         queue: songs,
         isShuffle,
         isRepeat,
-    }: AudioPlayerState = useAppSelector((state) => state.audioPlayer);
+    }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
 
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -90,7 +91,6 @@ export default function Playing({ isOpen, handleClose }: any) {
                     max-[550px]:block
                     max-[750px]:block'
                         onClick={() => handleClose()}>
-                        {/* handle responsive here */}
                         <div className='
                             m-auto
                             flex
