@@ -5,8 +5,14 @@ import { useGetAllTrackMutation } from "../track/trackApi";
 import { setError, setHomePageData, setLoading } from "./homePageSlice";
 export const useHomePageData = () => {
   const dispatch = useAppDispatch();
-  const { recentUsers, trendingArtists, topHits, popularHits, status } =
-    useAppSelector((state) => state.homepage);
+  const {
+    recentUsers,
+    trendingArtists,
+    popularArtists,
+    topHits,
+    popularHits,
+    status,
+  } = useAppSelector((state) => state.homepage);
 
   const [useGetAllArtist] = useGetAllArtistMutation();
   const [useGetAllTrack] = useGetAllTrackMutation();
@@ -24,8 +30,9 @@ export const useHomePageData = () => {
           setHomePageData({
             recentUsers: artists.slice(0, 10),
             trendingArtists: artists.slice(10, 20),
+            popularArtists: artists.slice(50, 60),
             topHits: tracks.slice(0, 10),
-            popularHits: tracks.slice(11, 28),
+            popularHits: tracks.slice(31, 38),
             allArtists: artists,
             allTracks: tracks,
           })
@@ -38,5 +45,12 @@ export const useHomePageData = () => {
 
     fetchHomePageData();
   }, [dispatch, useGetAllArtist, useGetAllTrack]);
-  return { recentUsers, trendingArtists, topHits, popularHits, status };
+  return {
+    recentUsers,
+    trendingArtists,
+    popularArtists,
+    topHits,
+    popularHits,
+    status,
+  };
 };

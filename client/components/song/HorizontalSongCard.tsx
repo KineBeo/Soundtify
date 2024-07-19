@@ -52,6 +52,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                     height={200}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="w-full h-full rounded object-cover"
+                    loading="eager"
                 />
             </div>
             <div
@@ -67,7 +68,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
                 w-full
                 truncate
                 ">
-                    {allArtists?.find((artist: Artist) => artist.id === song.user_id)?.username || "Unknown Artist"}
+                    {allArtists?.find((artist: Artist) => artist.id === song.user_id)?.display_name || "Unknown Artist"}
                 </p>
             </div>
             <div className="

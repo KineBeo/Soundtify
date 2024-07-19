@@ -11,6 +11,7 @@ export enum RequestStatus {
 export interface HomePageState {
   recentUsers: Artist[] | undefined;
   trendingArtists: Artist[] | undefined;
+  popularArtists: Artist[] | undefined;
   topHits: Track[] | undefined;
   popularHits: Track[] | undefined;
   allArtists: Artist[] | undefined;
@@ -21,6 +22,7 @@ export interface HomePageState {
 const initialState: HomePageState = {
   recentUsers: [],
   trendingArtists: [],
+  popularArtists: [],
   topHits: [],
   popularHits: [],
   allArtists: [],

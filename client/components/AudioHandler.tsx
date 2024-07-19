@@ -99,6 +99,7 @@ function AudioHandler() {
 
         audioRef.current = new Howl({
             src: [activeSong!.src],
+            html5: false,
             onend: toNextSong,
             onload: handleLoad,
             onplay: handlePlay,

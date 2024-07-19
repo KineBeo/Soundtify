@@ -15,7 +15,6 @@ export default function ArtistProfile({ params }: { params: { id: number } }) {
     const { allTracks }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     const artist = allArtists?.find(artist => artist.id === Number(params.id));
     const artistTracks = allTracks?.filter(track => track.user_id === Number(params.id));
-    console.log(artistTracks);
     return (
         <div className="
         bg-neutral-900

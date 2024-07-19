@@ -47,6 +47,7 @@ const HorizontalArtistCard: React.FC<HorizontalArtistCardProps> = ({
                     width={200}
                     height={200}
                     className="w-full h-full rounded-full object-cover"
+                    loading="lazy"
                 />
             </div>
             <div

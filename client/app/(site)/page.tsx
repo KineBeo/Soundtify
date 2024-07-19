@@ -10,6 +10,7 @@ export default function Home() {
 
   const { recentUsers: recentArtist,
     trendingArtists,
+    popularArtists,
     topHits,
     popularHits,
     status } = useHomePageData();
@@ -55,12 +56,12 @@ export default function Home() {
         <div className="mt-2 mb-7 px-6">
 
           <div className="pt-10 lg:pt-2 sm:pt-1 md:pt-2">
-            <div className="mt-3">
+            <div className="mt-12">
               <div className="text-2xl mb-6 font-semibold">
-                Artist
+                Popular Artists
               </div>
-              {recentArtist && recentArtist.length > 0 ? (
-                <HorizontalArtistList artists={recentArtist} />
+              {popularArtists && popularArtists.length > 0 ? (
+                <HorizontalArtistList artists={popularArtists} />
               ) : (
                 <p>No artists available</p>
               )}
@@ -75,7 +76,6 @@ export default function Home() {
                 <p>No artists available</p>
               )}
             </div>
-
             <div className="mt-12">
               <h1 className="text-2xl mb-6 font-semibold">
                 Top Hits this Week
