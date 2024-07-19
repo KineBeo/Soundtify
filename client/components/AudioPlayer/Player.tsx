@@ -113,7 +113,7 @@ const Player = () => {
                                 {activeSong.track_name}
                             </p>
                             <p>
-                                {allArtists?.find((artist) => artist.id === activeSong.user_id)?.username || "Unknown Artist"}
+                                {allArtists?.find((artist) => artist.id === activeSong.user_id)?.display_name || "Unknown Artist"}
                             </p>
                         </div>
 
