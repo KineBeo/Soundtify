@@ -35,43 +35,37 @@ function LikeButton({ user_id, song_id, size, isList }: any) {
 
     const handleLike = async (e: React.MouseEvent) => {
         e.stopPropagation();
-        try {
-            dispatch(addLike({ song_id }));
-            setLike(true);
-            await likeTrack({ trackId: song_id, userId: user_id }).unwrap();
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(addLike({ song_id }));
+        setLike(true);
+        await likeTrack({ trackId: song_id, userId: user_id }).unwrap();
+
     }
 
     const handleUnlike = async (e: React.MouseEvent) => {
         e.stopPropagation();
-        try {
-            dispatch(removeLike({ song_id }));
-            setLike(false);
-            await unlikeTrack({ trackId: song_id, userId: user_id }).unwrap();
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(removeLike({ song_id }));
+        setLike(false);
+        await unlikeTrack({ trackId: song_id, userId: user_id }).unwrap();
+
     }
     return (
         <div
             className={
-                isList ?
-                    (like
-                        ? "visible"
-                        : "invisible group-hover:visible") : undefined
+                isList &&
+                (like
+                    ? "visible"
+                    : "invisible group-hover:visible max-[550px]:visible max-[750px]:visible")
             }
         >
-            {!like
-                ? (<Tooltip content="Like">
+            {!like ? (
+                <Tooltip content="Like">
                     <i onClick={handleLike}>
-                        <AiOutlineHeart className='cursor-pointer' size={size} />
+                        <AiOutlineHeart className='cursor-pointer mx-2 hover:text-white' size={size} />
                     </i>
                 </Tooltip>)
                 : (<Tooltip content="unlike">
                     <i onClick={handleUnlike}>
-                        <AiFillHeart className='text-[#2bb540] cursor-pointer' size={size} />
+                        <AiFillHeart className='text-[#2bb540] cursor-pointer mx-2' size={size} />
                     </i>
                 </Tooltip>)}
         </div >

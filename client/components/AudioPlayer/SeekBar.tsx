@@ -3,8 +3,14 @@ import { AudioPlayerState, setSeekTime } from '@/lib/features/audioPlayer/audioP
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import { RootState } from '@/lib/store';
 import { Slider, SliderValue } from '@nextui-org/react'
+import { twMerge } from 'tailwind-merge';
 
-const SeekBar = () => {
+interface SeekBarProps {
+    className: string;
+}
+const SeekBar: React.FC<SeekBarProps> = ({
+    className
+}) => {
     const getTime = (time: number) => {
         return `${Math.floor(time / 60)}:${`0${Math.floor(time % 60)}`.slice(-2)}`;
     }
@@ -34,7 +40,8 @@ const SeekBar = () => {
     }
     return (
         <Slider
-            size="md"
+            className={twMerge(`text-gray-300 text-md`, className)}
+            size="sm"
             color={"foreground"}
             step={0.01}
             value={time}

@@ -7,9 +7,10 @@ import Image from 'next/image'
 import Buttons from './Buttons'
 import ControlCenter from './ControlCenter'
 import SeekBar from './SeekBar'
-import { getAllArtists } from '@/lib/features/artist/getAllArtists'
 import PlayingModal from '../Playing'
 import { HomePageState } from '@/lib/features/homePage/homePageSlice'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 const Player = () => {
     const {
         isPlaying,
@@ -20,9 +21,11 @@ const Player = () => {
         isShuffle,
         isRepeat,
     }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
-    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
+    const router = useRouter();
     const dispatch = useAppDispatch();
     const { id } = useAppSelector((state: RootState) => state.auth);
+    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
+    const artist = allArtists?.find((artist) => artist.id === activeSong?.user_id);
     const updateVolume = (volume: any) => {
         dispatch(setVolume(volume));
     }
@@ -78,7 +81,10 @@ const Player = () => {
              items-center
              justify-between
              w-screen 
-             max-w-full'>
+             max-w-full
+             max-[550px]:p-2
+             max-[550px]:pb-0
+             max-[750px]:px-2'>
                     <div className='
                 flex flex-row items-center w-full cursor-pointer'
                         onClick={() => setOpenPlayingModal(!isOpenPlayingModal)}>
@@ -89,7 +95,14 @@ const Player = () => {
                 min-w-[50px]
                 relative
                 cursor-pointer
-                rounded'>
+                rounded
+                max-[550px]:w-[35px]
+                max-[550px]:h-[35px]
+                max-[550px]:min-w-[35px] 
+                max-[750px]:w-[40px]
+                max-[750px]:h-[40px]
+                max-[750px]:min-w-[40px]
+                '>
                             <Image className='
                     object-cover
                     w-full
@@ -107,19 +120,24 @@ const Player = () => {
                             />
 
                         </div>
-                        <div className='mx-4'>
+                        <div className='mx-4 max-[550px]:mx-3'>
                             <p
-                                className='text-gray-300 cursor-pointer line-clamp-1'>
+                                className='text-gray-300 cursor-pointer line-clamp-1 max-[550px]:text-sm'>
                                 {activeSong.track_name}
                             </p>
-                            <p>
-                                {allArtists?.find((artist) => artist.id === activeSong.user_id)?.display_name || "Unknown Artist"}
-                            </p>
+                            {/* fix later  */}
+                            <>
+                                <Link className='hover:underline'
+                                    href={`/artist/${artist?.id}`}
+                                >
+                                    {artist?.display_name}
+                                </Link>
+                            </>
                         </div>
 
                     </div>
                     {/* controls */}
-                    <div className=''>
+                    <div className='w-full'>
                         <ControlCenter
                             isPlaying={isPlaying}
                             isFullScreen={false}
@@ -132,7 +150,7 @@ const Player = () => {
                         >
                         </ControlCenter>
 
-                        <SeekBar />
+                        <SeekBar className='max-[550px]:hidden max-[750px]:hidden' />
                     </div>
                     {/* button */}
                     <Buttons
@@ -142,7 +160,7 @@ const Player = () => {
                         updateVolume={updateVolume}
                         showVolumeSeekbar
                         volume={volume}
-                        className=''
+                        className='max-[550px]:hidden max-[750px]:hidden'
                     />
                 </div>
             </div>

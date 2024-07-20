@@ -201,9 +201,9 @@ export default function Playing({ isOpen, handleClose }: any) {
                                 <div className='flex flex-col justify-center items-center max-[550px]:pb-14'>
                                     <div className='mb-10 flex flex-row justify-between items-center w-full 
                                     max-[550px]:w-[320px]
-                                    max-[750px]:w-[320px]
-                                    max-[874px]:w-[350px]
-                                    max-[1280px]:w-[400px]
+                                    max-[750px]:w-[400px]
+                                    max-[874px]:w-[320px]
+                                    max-[1280px]:w-[350px]
                                     
                                      '>
                                         <div>
@@ -223,7 +223,7 @@ export default function Playing({ isOpen, handleClose }: any) {
 
                                         </div>
                                     </div>
-                                    <SeekBar />
+                                    <SeekBar className='visible' />
                                     <ControlCenter
                                         isFullScreen={true}
                                         isShuffle={isShuffle}
