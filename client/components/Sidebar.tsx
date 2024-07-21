@@ -1,12 +1,16 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { HiHome } from 'react-icons/hi'
 import Box from './Box'
 import Sidebaritem from './Sidebaritem'
 import Library from './Library'
+import { useAppSelector } from '@/lib/hook'
+import { RootState } from '@/lib/store'
+import { useGetLikedTracksMutation } from '@/lib/features/audioPlayer/audioPlayerApi'
+import Track from '@/interfaces/track'
 interface SidebarProps {
     children: React.ReactNode
 
@@ -14,6 +18,22 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({
     children
 }) => {
+    const { liked } = useAppSelector((state: RootState) => state.audioPlayer);
+    const [getLikedTracks] = useGetLikedTracksMutation();
+    const [songs, setSongs] = useState<Track[]>([]);
+
+    useEffect(() => {
+        const fetchSongs = async () => {
+            try {
+                const result = await getLikedTracks(liked).unwrap();
+                setSongs(result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchSongs();
+    }, [getLikedTracks, liked]);
 
     const pathname = usePathname();
     const routes = useMemo(() => [
@@ -32,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         }
     ], [pathname]);
     return (
-        <div className='flex h-full'>
+        <div className='flex h-screen'>
             <div
                 className='
             hidden
@@ -40,10 +60,10 @@ const Sidebar: React.FC<SidebarProps> = ({
             flex-col
             gap-y-2
             bg-black
-            h-full
+            h-screen
             w-[300px]
             p-2'>
-                <Box>
+                <Box className='h-fit'>
                     <div
                         className='
                         flex
@@ -62,8 +82,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                 </Box>
 
-                <Box className='h-screen overflow-y-auto'>
-                    <Library />
+                <Box className='h-[76.5vh] overflow-y-scroll'>
+                    <Library songs={songs} />
                 </Box>
             </div>
             <main className='h-full flex-1 overflow-y-auto py-2'>

@@ -51,10 +51,10 @@ function LikeButton({ user_id, song_id, size, isList }: any) {
     return (
         <div
             className={
-                isList &&
-                (like
-                    ? "visible"
-                    : "invisible group-hover:visible max-[550px]:visible max-[750px]:visible")
+                isList ?
+                    (like
+                        ? "visible"
+                        : "invisible group-hover:visible max-[550px]:visible max-[750px]:visible") : undefined
             }
         >
             {!like ? (

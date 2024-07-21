@@ -1,4 +1,4 @@
-import Reactt from 'react'
+import React from 'react'
 import { BiShuffle, BiRepeat } from 'react-icons/bi';
 import { BiPlay, BiPause } from 'react-icons/bi';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';

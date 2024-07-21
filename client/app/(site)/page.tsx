@@ -78,20 +78,20 @@ export default function Home() {
             </div>
             <div className="mt-12">
               <h1 className="text-2xl mb-6 font-semibold">
-                Top Hits this Week
+                Popular releases
               </h1>
-              {topHits && topHits.length > 0 ? (
-                <HorizontalSongsList songs={topHits} />
+              {popularHits && popularHits.length > 0 ? (
+                <HorizontalSongsList songs={popularHits} />
               ) : (
                 <p>No songs available</p>
               )}
             </div>
             <div className="mt-12">
               <h1 className="text-2xl mb-6 font-semibold">
-                Popular releases
+                Top Hits this Week
               </h1>
-              {popularHits && popularHits.length > 0 ? (
-                <HorizontalSongsList songs={popularHits} />
+              {topHits && topHits.length > 0 ? (
+                <HorizontalSongsList songs={topHits} />
               ) : (
                 <p>No songs available</p>
               )}

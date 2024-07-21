@@ -106,7 +106,10 @@ const Header: React.FC<HeaderProps> = ({
                         transition
                         '
                     >
-                        <HiHome className='text-black' size={26} />
+                        <HiHome className='text-black' size={26}
+                            onClick={() => {
+                                router.push('/');
+                            }} />
                     </button>
                     <button
                         className='
@@ -119,7 +122,10 @@ const Header: React.FC<HeaderProps> = ({
                         transition
                         '
                     >
-                        <BiSearch className='text-black' size={26} />
+                        <BiSearch className='text-black' size={26}
+                            onClick={() => {
+                                router.push('/search');
+                            }} />
                     </button>
                 </div>
                 <div className='

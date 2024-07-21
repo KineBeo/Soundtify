@@ -3,18 +3,20 @@ import Header from "@/components/Header"
 import ListItem from "@/components/ListItem";
 import MediaItem from "@/components/MediaItem";
 import { HomePageState } from "@/lib/features/homePage/homePageSlice"
-import { useAppSelector } from "@/lib/hook";
+import { useAppDispatch, useAppSelector } from "@/lib/hook";
 import { RootState } from "@/lib/store";
 import Image from "next/image"
 import { GoVerified } from "react-icons/go";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { MdVerifiedUser } from "react-icons/md";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import { setActiveSong } from "@/lib/features/audioPlayer/audioPlayerSlice";
 export default function ArtistProfile({ params }: { params: { id: number } }) {
     const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     const { allTracks }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     const artist = allArtists?.find(artist => artist.id === Number(params.id));
     const artistTracks = allTracks?.filter(track => track.user_id === Number(params.id));
+    const dispatch = useAppDispatch();
     return (
         <div className="
         bg-neutral-900
@@ -73,7 +75,11 @@ export default function ArtistProfile({ params }: { params: { id: number } }) {
                             {artistTracks && artistTracks.length > 0 ? (
                                 artistTracks.map((song) => (
                                     <div key={song.id}>
-                                        <MediaItem song={song} />
+                                        <MediaItem song={song} onTap={() => dispatch(setActiveSong({
+                                            index: artistTracks.indexOf(song),
+                                            songs: artistTracks,
+                                            activeSong: song
+                                        }))} />
                                     </div>
                                 ))
                             ) : (

@@ -1,11 +1,21 @@
 'use client'
+import Track from '@/interfaces/track';
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { TbPlaylist } from 'react-icons/tb';
-const Library = () => {
+import MediaItem from './MediaItem';
+import { useAppDispatch } from '@/lib/hook';
+import { setActiveSong } from '@/lib/features/audioPlayer/audioPlayerSlice';
+interface LibraryProps {
+    songs: Track[];
+}
+const Library: React.FC<LibraryProps> = ({
+    songs
+}) => {
     const onClick = () => {
         // Handle upload 
     };
+    const dispatch = useAppDispatch();
     return (
         <div className='flex flex-col'>
             <div
@@ -47,7 +57,17 @@ const Library = () => {
                 mt-4
                 px-3
             '>
-                List of Songs!
+                {songs.map((song) => (
+                    <MediaItem
+                        key={song.id}
+                        song={song}
+                        onTap={() => dispatch(setActiveSong({
+                            index: songs.indexOf(song),
+                            songs: songs,
+                            activeSong: song
+                        }))}
+                    />
+                ))}
             </div>
         </div>
     )

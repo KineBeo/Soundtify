@@ -1,13 +1,22 @@
+import Artist from '@/interfaces/artist';
 import Track from '@/interfaces/track'
+import { AudioPlayerState } from '@/lib/features/audioPlayer/audioPlayerSlice';
+import { HomePageState } from '@/lib/features/homePage/homePageSlice';
+import { useAppSelector } from '@/lib/hook';
+import { RootState } from '@/lib/store';
 import Image from 'next/image';
 import React from 'react'
 
 interface MediaItemProps {
     song: Track;
+    onTap: () => void
 }
 const MediaItem: React.FC<MediaItemProps> = ({
-    song
+    song,
+    onTap
 }) => {
+    const { activeSong }: AudioPlayerState = useAppSelector((state: RootState) => state.audioPlayer);
+    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
     return (
         <div className='
     flex
@@ -18,7 +27,8 @@ const MediaItem: React.FC<MediaItemProps> = ({
     w-full
     p-2
     rounded-md
-    '>
+    '
+            onClick={onTap}>
             <div className='
         relative 
         rounded-md
@@ -39,10 +49,14 @@ const MediaItem: React.FC<MediaItemProps> = ({
             gap-y-1
             overflow-hidden'>
                 <p className='text-white truncate'>
-                    {song.track_name}
+                    {activeSong?.id === song.id ?
+                        (<div className='text-[#2bb540]'>
+                            {song.track_name}
+                        </div>)
+                        : song.track_name}
                 </p>
                 <p className='text-neutral-400 text-md truncate'>
-                    artist
+                    {allArtists?.find((artist: Artist) => artist.id === song.user_id)?.display_name || "Unknown Artist"}
                 </p>
             </div>
         </div>
