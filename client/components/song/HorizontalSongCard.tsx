@@ -46,7 +46,7 @@ function HorizontalSongCard({ song, onClick }: HorizontalSongCardProps) {
             >
 
                 <Image
-                    src={song.cover_image?.url || "/images/liked.png"}
+                    src={song.cover_image || "/images/liked.png"}
                     alt="song cover image"
                     width={200}
                     height={200}

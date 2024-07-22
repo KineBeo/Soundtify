@@ -26,7 +26,8 @@ export default function Home() {
           overflow-hidden
           overflow-y-auto
         " >
-        <Header bgColor="">
+        <Header bgColor="" className="bg-gradient-to-b
+        from-emerald-800">
           <div className="mb-2">
             <h1
               className="

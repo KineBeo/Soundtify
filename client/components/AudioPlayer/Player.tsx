@@ -114,7 +114,7 @@ const Player = () => {
                     scale-100
                     hover:scale-110'
                                 alt={""}
-                                src={activeSong.cover_image?.url || "/images/liked.png"}
+                                src={activeSong.cover_image!}
                                 width={100}
                                 height={100}
                             />

@@ -25,7 +25,8 @@ export default function ArtistProfile({ params }: { params: { id: number } }) {
         w-full
         overflow-hidden
         overflow-y-auto">
-            <Header>
+            <Header className="bg-gradient-to-b
+        from-emerald-800">
                 <div className="flex flex-row relative w-full h-[300px] max-[550px]:h-[250px]">
                     <div className="flex flex-col justify-end absolute w-full h-full bg-opacity-40 z-10">
                         <div className="px-8 pb-8

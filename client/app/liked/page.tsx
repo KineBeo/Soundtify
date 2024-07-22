@@ -34,7 +34,8 @@ const Liked = () => {
         overflow-hidden
         overflow-y-auto
         '>
-            <Header bgColor=''>
+            <Header className='bg-gradient-to-b
+        from-emerald-800'>
                 <div className='mt-20'>
                     <div className='
                         flex

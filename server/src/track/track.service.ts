@@ -65,6 +65,10 @@ export class TrackService {
     throw new BadRequestException('Track not found');
   }
 
+  async deleteAllTrack() {
+    await this.trackRepository.clear();
+  }
+
   // UPDATE
   async update(id: number, updateData: CreateTrackDto) {
     const track = await this.trackRepository.findOne({

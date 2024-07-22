@@ -284,7 +284,7 @@ function SongCoverImage({ activeSong, className }: any) {
             }
         >
             <Image
-                src={activeSong!.cover_image?.url || "/images/liked.png"}
+                src={activeSong!.cover_image || "/images/liked.png"}
                 width={450}
                 height={450}
                 alt="Playing Image"

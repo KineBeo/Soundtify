@@ -1,8 +1,3 @@
-interface CoverImage {
-  url: string;
-  color: string;
-}
-
 export default interface Track {
   id: number;
   user_id?: number;
@@ -15,6 +10,6 @@ export default interface Track {
   track_name?: string;
   download_url?: string;
   src: string;
-  cover_image?: CoverImage;
+  cover_image?: string;
   // collections?: Collection[];
 }

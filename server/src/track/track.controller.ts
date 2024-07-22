@@ -1,46 +1,51 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { TrackService } from "./track.service";
-import { CreateTrackDto } from "./dto/createTrack.dto";
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { TrackService } from './track.service';
+import { CreateTrackDto } from './dto/createTrack.dto';
 
 @Controller('tracks')
 export class TrackController {
-    constructor(private readonly trackService: TrackService) { }
+  constructor(private readonly trackService: TrackService) {}
 
-    // CREATE
-    @Post('create')
-    async create(@Body() newTrackData: CreateTrackDto) {
-        return this.trackService.createTrack(newTrackData);
-    }
+  // CREATE
+  @Post('create')
+  async create(@Body() newTrackData: CreateTrackDto) {
+    return this.trackService.createTrack(newTrackData);
+  }
 
-    @Post('create-many')
-    async createManyWithJson(@Body() newTracksData: CreateTrackDto[]) {
-        return this.trackService.createManyTracks(newTracksData);
-    }
+  @Post('create-many')
+  async createManyWithJson(@Body() newTracksData: CreateTrackDto[]) {
+    return this.trackService.createManyTracks(newTracksData);
+  }
 
-    // GET
-    @Get('all-tracks') 
-    async getAllTracks() {
-        return this.trackService.getAllTracks();
-    }
+  // GET
+  @Get('all-tracks')
+  async getAllTracks() {
+    return this.trackService.getAllTracks();
+  }
 
-    @Get('/:id')
-    async getTrackById(@Param('id') id: number) {
-        return this.trackService.getTrackById(id);
-    }
+  @Get('/:id')
+  async getTrackById(@Param('id') id: number) {
+    return this.trackService.getTrackById(id);
+  }
 
-    @Get('/name/:track_name')
-    async getTrackByName(@Param('track_name') track_name: string) {
-        return this.trackService.getTrackByName(track_name);
-    }
+  @Get('/name/:track_name')
+  async getTrackByName(@Param('track_name') track_name: string) {
+    return this.trackService.getTrackByName(track_name);
+  }
 
-    @Get('/artist/:user_id')
-    async getTrackOfArtist(@Param('user_id') user_id: number) {
-        return this.trackService.getTrackOfArtist(user_id);
-    }
+  @Get('/artist/:user_id')
+  async getTrackOfArtist(@Param('user_id') user_id: number) {
+    return this.trackService.getTrackOfArtist(user_id);
+  }
 
-    // DELETE 
-    @Delete('/:id')
-    async deleteTrack(@Param('id') id: number) {
-        return this.trackService.deleteTrack(id);
-    }
+  // DELETE
+  @Delete('/:id')
+  async deleteTrack(@Param('id') id: number) {
+    return this.trackService.deleteTrack(id);
+  }
+
+  @Delete()
+  async deleteAllTracks() {
+    return this.trackService.deleteAllTrack();
+  }
 }

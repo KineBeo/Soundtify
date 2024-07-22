@@ -40,7 +40,7 @@ const MediaItem: React.FC<MediaItemProps> = ({
                     className='object-cover'
                     fill
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    src={song.cover_image?.url || ""}
+                    src={song.cover_image || "/images/liked.png"}
                     alt='Image' />
             </div>
             <div className='
@@ -50,9 +50,9 @@ const MediaItem: React.FC<MediaItemProps> = ({
             overflow-hidden'>
                 <p className='text-white truncate'>
                     {activeSong?.id === song.id ?
-                        (<div className='text-[#2bb540]'>
+                        (<i className='text-[#2bb540]'>
                             {song.track_name}
-                        </div>)
+                        </i>)
                         : song.track_name}
                 </p>
                 <p className='text-neutral-400 text-md truncate'>
