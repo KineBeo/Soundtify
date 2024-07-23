@@ -4,7 +4,7 @@ import { url } from "inspector";
 export const trackApi = createApi({
   reducerPath: "trackApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/",
+    baseUrl: "http://localhost:5000/",
   }),
 
   endpoints: (builder) => ({

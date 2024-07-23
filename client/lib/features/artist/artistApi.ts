@@ -3,7 +3,7 @@ import Artist from "@/interfaces/artist";
 export const artistApi = createApi({
   reducerPath: "artistApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/",
+    baseUrl: "http://localhost:5000/",
   }),
   endpoints: (builder) => ({
     getAllArtist: builder.mutation<Artist[], void>({
