@@ -4,7 +4,7 @@ import { LoginResponse, RegisterResponse } from "./authSlice";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://soundtify.onrender.com",
   }),
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, { email: string; password: string }>(

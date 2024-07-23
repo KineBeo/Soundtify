@@ -3,7 +3,7 @@ import Artist from "@/interfaces/artist";
 export const artistApi = createApi({
   reducerPath: "artistApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://soundtify.onrender.com",
   }),
   endpoints: (builder) => ({
     getAllArtist: builder.mutation<Artist[], void>({

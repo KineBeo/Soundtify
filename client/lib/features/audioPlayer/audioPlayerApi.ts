@@ -9,7 +9,7 @@ interface Liked {
 export const audioPlayerApi = createApi({
   reducerPath: "audioPlayerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://soundtify.onrender.com",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {
