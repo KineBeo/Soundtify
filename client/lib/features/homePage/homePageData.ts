@@ -31,7 +31,7 @@ export const useHomePageData = () => {
           trendingArtists: artists.slice(10, 20),
           popularArtists: artists.slice(50, 60),
           topHits: tracks.slice(0, 10),
-          popularHits: tracks.slice(31, 38),
+          popularHits: tracks.slice(31, 56),
           allArtists: artists,
           allTracks: tracks,
         })

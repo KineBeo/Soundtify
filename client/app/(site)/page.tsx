@@ -89,7 +89,7 @@ export default function Home() {
             </div>
             <div className="mt-12">
               <h1 className="text-2xl mb-6 font-semibold">
-                Top Hits this Week
+                Top Soundtrack This Week
               </h1>
               {topHits && topHits.length > 0 ? (
                 <HorizontalSongsList songs={topHits} />
