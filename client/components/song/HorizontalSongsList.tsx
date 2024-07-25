@@ -1,3 +1,4 @@
+'use client'
 import { useAppDispatch } from '@/lib/hook';
 import Track from '@/interfaces/track';
 import React from 'react'

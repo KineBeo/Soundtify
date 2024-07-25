@@ -1,3 +1,4 @@
+// this one should be server side component
 'use client'
 import Header from '@/components/Header';
 import React, { useEffect, useState } from 'react'

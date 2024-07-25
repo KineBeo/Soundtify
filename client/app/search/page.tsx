@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import Header from '@/components/Header'
 import Track from '@/interfaces/track'
 import { useAppDispatch, useAppSelector } from '@/lib/hook';
 import algoliaClient from '@/config/algolia';

@@ -1,6 +1,4 @@
 'use client'
-import Header from "@/components/Header"
-import ListItem from "@/components/ListItem";
 import MediaItem from "@/components/MediaItem";
 import { HomePageState } from "@/lib/features/homePage/homePageSlice"
 import { useAppDispatch, useAppSelector } from "@/lib/hook";

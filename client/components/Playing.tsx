@@ -9,7 +9,7 @@ import ControlCenter from './AudioPlayer/ControlCenter';
 import VolumeControl from './AudioPlayer/VolumeControl';
 import { BiChevronDown } from 'react-icons/bi';
 import { BiDownload } from 'react-icons/bi';
-import Image from 'next/image';
+import { Image } from "@nextui-org/react"
 import { RootState } from '@/lib/store';
 export default function Playing({ isOpen, handleClose }: any) {
     const {
@@ -107,6 +107,8 @@ export default function Playing({ isOpen, handleClose }: any) {
                                 className="
                                 max-[550px]:hidden
                                 max-[750px]:hidden
+                                mb-6
+                                my-4
                             " />
                             <div
                                 className='
@@ -207,7 +209,8 @@ export default function Playing({ isOpen, handleClose }: any) {
                                     
                                      '>
                                         <div>
-                                            <p className='text-gray-300 cursor-pointer line-clamp-1 md:text-lg sm:text-sm text-sm'>
+                                            <p className='text-gray-300 cursor-pointer line-clamp-1 
+                                        text-lg max-[550px]:text-sm max-[874px]:text-base'>
                                                 {activeSong!.track_name}
                                             </p>
                                             <p className='text-gray-400 text-sm hover:underline cursor-pointer'
@@ -270,33 +273,21 @@ export default function Playing({ isOpen, handleClose }: any) {
 
 function SongCoverImage({ activeSong, className }: any) {
     return (
-        <div
+        <Image
+            src={activeSong!.cover_image || "/images/liked.png"}
+            width={450}
+            height={450}
+            alt="Playing Image"
             className={`
             w-[450px] h-[450px] min-w-[450px]
-            max-[550px]:w-[320px] max-[550px]:h-[320px] max-[550px]:min-w-[320px]
-            max-[750px]:mx-4 max-[750px]:w-[400px] max-[750px]:h-[400px] max-[750px]:min-w-[400px]
+            max-[550px]:w-[320px] max-[550px]:h-[320px] max-[550px]:min-w-[320px] max-[550px]:min-h-[320px]
+            max-[750px]:mx-4 max-[750px]:w-[330px] max-[750px]:h-[330px] max-[750px]:min-w-[330px] max-[750px]:min-h-[330px]
             max-[874px]:mx-4 max-[874px]:w-[370px] max-[874px]:h-[370px] max-[874px]:min-w-[370px]
             max-[1280px]:mx-4 max-[1280px]:w-[400px] max-[1280px]:h-[400px] max-[1280px]:min-w-[400px]
             relative 
-            mx-10
-            rounded
-          ${className}`
+            rounded-2xl object-cover 
+          ` + className
             }
-        >
-            <Image
-                src={activeSong!.cover_image || "/images/liked.png"}
-                width={450}
-                height={450}
-                alt="Playing Image"
-                className="
-                w-[450px] h-[450px] min-w-[450px]
-                max-[550px]:w-[320px] max-[550px]:h-[320px] max-[550px]:min-w-[320px]
-                max-[750px]:mx-4 max-[750px]:w-[400px] max-[750px]:h-[400px] max-[750px]:min-w-[400px]
-                max-[874px]:mx-4 max-[874px]:w-[370px] max-[874px]:h-[370px] max-[874px]:min-w-[370px]
-                max-[1280px]:mx-4 max-[1280px]:w-[400px] max-[1280px]:h-[400px] max-[1280px]:min-w-[400px]
-                object-cover rounded-2xl shadow-2xl
-          "
-            />
-        </div>
+        />
     );
 }
