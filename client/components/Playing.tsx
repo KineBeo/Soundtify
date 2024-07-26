@@ -11,6 +11,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { BiDownload } from 'react-icons/bi';
 import { Image } from "@nextui-org/react"
 import { RootState } from '@/lib/store';
+import { HomePageState } from '@/lib/features/homePage/homePageSlice';
 export default function Playing({ isOpen, handleClose }: any) {
     const {
         isPlaying,
@@ -24,6 +25,7 @@ export default function Playing({ isOpen, handleClose }: any) {
 
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const { allArtists }: HomePageState = useAppSelector((state: RootState) => state.homepage);
 
     const toNextSong = () => {
         let nextSongIndex = currentIndex + 1;
@@ -217,7 +219,7 @@ export default function Playing({ isOpen, handleClose }: any) {
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                 }}>
-                                                Artist here
+                                                {allArtists?.find((artist: any) => artist.id === activeSong!.user_id)?.display_name || "Unknown Artist"}
                                             </p>
                                         </div>
                                         <div className='w-10 h-10 flex items-center justify-center'>
