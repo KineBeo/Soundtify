@@ -1,5 +1,4 @@
 'use client'
-
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useMemo, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'

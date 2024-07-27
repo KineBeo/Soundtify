@@ -1,7 +1,7 @@
 'use client'
 import Loading from '@/components/Loading'
 import { AppStore, makeStore } from '@/lib/store'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'

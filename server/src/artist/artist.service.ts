@@ -11,7 +11,6 @@ export class ArtistService {
     private artistRepository: Repository<Artist>,
   ) {}
 
-  // CREATE
   async createArtist(newArtistData: CreateArtistDto) {
     const newArtist = this.artistRepository.create(newArtistData);
     await this.artistRepository.save(newArtist);
@@ -24,7 +23,6 @@ export class ArtistService {
     return newArtists;
   }
 
-  // GET
   async getAllArtists() {
     console.log('Getting all artists');
     return await this.artistRepository.find();
@@ -36,7 +34,6 @@ export class ArtistService {
     });
   }
 
-  // GET
   async getRandomArtistByCount(count: number) {
     if (count > 30) {
       throw new BadRequestException(
@@ -58,7 +55,6 @@ export class ArtistService {
       .getMany();
   }
 
-  // DELETE
   async deleteArtist(id: number) {
     if (id < 0) {
       throw new BadRequestException('Please provide a positive ID.');

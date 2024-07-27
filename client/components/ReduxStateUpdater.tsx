@@ -1,5 +1,4 @@
 'use client'
-
 import Artist from "@/interfaces/artist"
 import Track from "@/interfaces/track"
 import { setHomePageData } from "@/lib/features/homePage/homePageSlice";
