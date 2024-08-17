@@ -127,7 +127,7 @@ const Player = () => {
                             </p>
                             {/* fix later  */}
                             <>
-                                <Link className='hover:underline'
+                                <Link className='hover:underline text-green-500'
                                     href={`/artist/${artist?.id}`}
                                 >
                                     {artist?.display_name}

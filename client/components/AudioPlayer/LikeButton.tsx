@@ -60,12 +60,12 @@ function LikeButton({ user_id, song_id, size, isList }: any) {
             {!like ? (
                 <Tooltip content="Like">
                     <i onClick={handleLike}>
-                        <AiOutlineHeart className='cursor-pointer mx-2 hover:text-white' size={size} />
+                        <AiOutlineHeart className='cursor-pointer text-gray-400 hover:text-white ' size={size} />
                     </i>
                 </Tooltip>)
                 : (<Tooltip content="unlike">
                     <i onClick={handleUnlike}>
-                        <AiFillHeart className='text-[#2bb540] cursor-pointer mx-2' size={size} />
+                        <AiFillHeart className='text-[#2bb540] cursor-pointer' size={size} />
                     </i>
                 </Tooltip>)}
         </div >
