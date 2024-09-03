@@ -82,9 +82,9 @@ const Player = () => {
              justify-between
              w-screen 
              max-w-full
-             max-[550px]:p-2
-             max-[550px]:pb-0
-             max-[750px]:px-2'>
+             mobile:p-2
+             mobile:pb-0
+             tablet:px-2'>
                     <div className='
                 flex flex-row items-center w-full cursor-pointer'
                         onClick={() => setOpenPlayingModal(!isOpenPlayingModal)}>
@@ -96,12 +96,12 @@ const Player = () => {
                 relative
                 cursor-pointer
                 rounded
-                max-[550px]:w-[35px]
-                max-[550px]:h-[35px]
-                max-[550px]:min-w-[35px] 
-                max-[750px]:w-[40px]
-                max-[750px]:h-[40px]
-                max-[750px]:min-w-[40px]
+                mobile:w-[35px]
+                mobile:h-[35px]
+                mobile:min-w-[35px] 
+                tablet:w-[40px]
+                tablet:h-[40px]
+                tablet:min-w-[40px]
                 '>
                             <Image className='
                     object-cover
@@ -120,9 +120,9 @@ const Player = () => {
                             />
 
                         </div>
-                        <div className='mx-4 max-[550px]:mx-3'>
+                        <div className='mx-4 mobile:mx-3'>
                             <p
-                                className='text-gray-300 cursor-pointer line-clamp-1 max-[550px]:text-sm'>
+                                className='text-gray-300 cursor-pointer line-clamp-1 mobile:text-sm'>
                                 {activeSong.track_name}
                             </p>
                             {/* fix later  */}
@@ -150,7 +150,7 @@ const Player = () => {
                         >
                         </ControlCenter>
 
-                        <SeekBar className='max-[550px]:hidden max-[750px]:hidden' />
+                        <SeekBar className='mobile:hidden tablet:hidden' />
                     </div>
                     {/* button */}
                     <Buttons
@@ -160,7 +160,7 @@ const Player = () => {
                         updateVolume={updateVolume}
                         showVolumeSeekbar
                         volume={volume}
-                        className='max-[550px]:hidden max-[750px]:hidden'
+                        className='mobile:hidden tablet:hidden'
                     />
                 </div>
             </div>

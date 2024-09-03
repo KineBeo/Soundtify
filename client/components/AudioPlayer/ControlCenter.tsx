@@ -33,8 +33,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
             justify-between
             items-center
             mt-6
-            max-[550px]:w-[320px]
-            max-[750px]:w-[400px]'
+            mobile:w-[320px]
+            tablet:w-[400px]'
             >
                 <div
                     className='
@@ -79,14 +79,14 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                     mx-6
                     scale-100
                     hover:scale-110
-                    max-[550px]:h-10
-                    max-[550px]:w-10
-                    max-[750px]:h-10
-                    max-[750px]:w-10
-                    max-[874px]:h-12
-                    max-[874px]:w-12
-                    max-[1280px]:h-12
-                    max-[1280px]:w-12'
+                    mobile:h-10
+                    mobile:w-10
+                    tablet:h-10
+                    tablet:w-10
+                    mini-laptop:h-12
+                    mini-laptop:w-12
+                    laptop:h-12
+                    laptop:w-12'
                     > {!isPlaying
                         ?
                         <BiPlay className='text-[24px] ml-1' />
@@ -121,8 +121,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
         );
     }
     return (
-        <div className='flex flex-row justify-center items-center mb-2 max-[550px]:justify-end'>
-            <div className='flex flex-col items-center mr-6 max-[550px]:hidden'>
+        <div className='flex flex-row justify-center items-center mb-2 mobile:justify-end'>
+            <div className='flex flex-col items-center mr-6 mobile:hidden'>
                 <BiShuffle className='cursor-pointer 
                 text-gray-300 
                 text-[30px] 
@@ -138,7 +138,7 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 text-[30px] 
                 hover:text-white
                 hover:scale-110
-                max-[550px]:hidden'
+                mobile:hidden'
                 onClick={(e) => {
                     e.stopPropagation();
                     prevSong();
@@ -162,7 +162,7 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 mx-6
                 scale-100
                 hover:scale-110
-                max-[550px]:mx-0
+                mobile:mx-0
                 '
                 onClick={(e) => {
                     e.stopPropagation();
@@ -182,7 +182,7 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 hover:text-white
                 text-[30px]
                 hover:scale-110 
-                max-[550px]:hidden
+                mobile:hidden
                 '
                 onClick={(e) => {
                     e.stopPropagation();
@@ -191,7 +191,7 @@ const ControlCenter: React.FC<ControlCenterProps> = ({
                 }>
                 <AiFillStepForward />
             </i>
-            <div className='flex flex-col items-center mx-6 max-[550px]:hidden'>
+            <div className='flex flex-col items-center mx-6 mobile:hidden'>
                 <BiRepeat className='
                 cursor-pointer 
                 text-gray-300 

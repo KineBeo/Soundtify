@@ -68,12 +68,12 @@ const Search = () => {
                     flex
                     flex-row
                     w-[calc(100vw_-_14rem_-_16px)]
-                    max-[550px]:py-2
-                    max-[550px]:w-screen
-                    max-[550px]:px-4
-                    max-[750px]:px-4
-                    max-[874px]:w-[calc(100vw_-_55px)]
-                    max-[750px]:w-screen
+                    mobile:py-2
+                    mobile:w-screen
+                    mobile:px-4
+                    tablet:px-4
+                    mini-laptop:w-[calc(100vw_-_55px)]
+                    tablet:w-screen
                     items-center
                     '>
                     <Input
@@ -84,7 +84,7 @@ const Search = () => {
                         }
                         onChange={(e: any) => searchAlgolia(e.target.value)}
                         type='text'
-                        className='max-[550px]:w-[90%] max-[750px]:w-full w-[500px]'
+                        className='mobile:w-[90%] tablet:w-full w-[500px]'
                         placeholder='Search Music' />
                 </div>
                 {
@@ -94,22 +94,22 @@ const Search = () => {
                                 <div className='w-full text-center pt-10'></div>
                             ) : (
                                 <div>
-                                    <div className='pt-20 max-[550px]:pt-14 max-[750px]:pt-14'>
+                                    <div className='pt-20 mobile:pt-14 tablet:pt-14'>
                                         <div className='overflow-y-hidden 
                                             flex 
                                             px-8 
                                             justify-items-stretch
-                                            max-[874px]:px-4
-                                            max-[750px]:flex-col
-                                            max-[550px]:flex-col
-                                            max-[550px]:px-4
-                                            max-[750px]:px-6'>
+                                            mini-laptop:px-4
+                                            tablet:flex-col
+                                            mobile:flex-col
+                                            mobile:px-4
+                                            tablet:px-6'>
                                             <div className='
-                                                max-[550px]:w-full
-                                                max-[750px]:w-full
+                                                mobile:w-full
+                                                tablet:w-full
                                                 w-[32rem]
-                                                max-[1280px]:w-[26rem]'>
-                                                <h1 className='my-4 text-2xl max-[550px]:hidden max-[750px]:hidden font-bold'>
+                                                desktop:w-[26rem]'>
+                                                <h1 className='my-4 text-2xl mobile:hidden tablet:hidden font-bold'>
                                                     Top Result
                                                 </h1>
                                                 {topResult && (
@@ -123,10 +123,10 @@ const Search = () => {
                                                 )}
                                             </div>
                                             <div className='w-full ml-6
-                                                max-[550px]:ml-0
-                                                max-[550px]:mt-2
-                                                max-[750px]:mt-2
-                                                max-[750px]:m-0
+                                                mobile:ml-0
+                                                mobile:mt-2
+                                                tablet:mt-2
+                                                tablet:m-0
                                                     '>
                                                 <h1 className='my-4 text-2xl font-bold'>
                                                     Top Song
@@ -172,15 +172,15 @@ function TopResult({ object, onTap }: any) {
             <div
                 onClick={onTap}
                 className='flex flex-col h-[250px] bg-[#5f5d5d2f] relative hover:bg-[#5f5d5d2f] rounded 
-            max-[550px]:hidden
-            max-[750px]:hidden
-            max-[550px]:h-full
-            max-[750px]:h-full'>
+            mobile:hidden
+            tablet:hidden
+            mobile:h-full
+            tablet:h-full'>
                 <div>
                     <PlayPauseButton
                         isPlaying={(activeSong?.id === object.id) && isPlaying}
                         className='transition-all duration-75 opacity-0 group-hover:opacity-100' />
-                    <div className='p-6 max-[550px]:flex max-[750px]:flex'>
+                    <div className='p-6 mobile:flex tablet:flex'>
                         <div className='rounded relative w-24 h-24'>
 
                             <Image
@@ -189,7 +189,7 @@ function TopResult({ object, onTap }: any) {
                                 className='object-cover rounded w-24 h-24'
                             />
                         </div>
-                        <div className='max-[550px]:mx-4 max-[750px]:mx-4'>
+                        <div className='mobile:mx-4 tablet:mx-4'>
                             <p className='truncate mt-4 text-2xl font-bold'>
                                 {object.track_name}
                             </p>
@@ -212,10 +212,10 @@ function TopResult({ object, onTap }: any) {
         bg-[#5f5d5d2f]
         hover:bg-[#5f5d5d72]
         rounded
-        max-[550px]:hidden
-        max-[750px]:hidden
-        max-[550px]:h-full
-        max-[750px]:h-full
+        mobile:hidden
+        tablet:hidden
+        mobile:h-full
+        tablet:h-full
         '>
             <div className='rounded-full relative w-24 h-24'>
                 <Image

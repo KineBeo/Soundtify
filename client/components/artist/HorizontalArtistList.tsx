@@ -17,12 +17,11 @@ const HorizontalArtistList: React.FC<HorizontalArtistListProps> = ({
         <div
             className='
         grid
-        grid-cols-2
-        sm:grid-cols-3
-        md:grid-cols-3
-        lg:grid-cols-4
-        xl:grid-cols-5
-        2xl:grid-cols-8
+        mobile:grid-cols-2
+        tablet:grid-cols-3
+        mini-laptop:grid-cols-3
+        laptop:grid-cols-5
+        desktop:grid-cols-8
         gap-4
         mt-4'>
 
