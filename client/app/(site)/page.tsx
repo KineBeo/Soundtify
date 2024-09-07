@@ -4,6 +4,7 @@ import ListItem from "@/components/ListItem";
 import Artist from "@/interfaces/artist";
 import Track from "@/interfaces/track";
 import dynamic from "next/dynamic";
+import Footer from "@/components/footer/Footer";
 
 const HorizontalArtistList = dynamic(
   () => import("@/components/artist/HorizontalArtistList")
@@ -73,8 +74,13 @@ export default async function Home() {
             <div className="text-2xl mb-6 mt-6 font-semibold">Top soundtrack</div>
               <HorizontalSongsList songs={data.topHits} />
             </Suspense>
-            <div className="h-40"></div>
           </div>
+        </div>
+        <div className="p-4">
+          <Footer />
+        </div>
+        <div className="h-40">
+
         </div>
       </div>
     </div>
