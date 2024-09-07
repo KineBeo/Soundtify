@@ -69,10 +69,10 @@ export default function Playing({ isOpen, handleClose }: any) {
                       -right-[30%]
                        z-10 
                        rotate-12 
-                       max-[550px]:-right-[10%]
-                       max-[550px]:-top-0
-                       max-[750px]:-right-[10%] 
-                       max-[750px]:-top-0
+                       mobile:-right-[10%]
+                       mobile:-top-0
+                       tablet:-right-[10%] 
+                       tablet:-top-0
                        '
                 />
                 <Image
@@ -90,16 +90,16 @@ export default function Playing({ isOpen, handleClose }: any) {
                     flex-row
                     items-center
                     justify-center
-                    max-[550px]:block
-                    max-[750px]:block'
+                    mobile:block
+                    tablet:block'
                         onClick={() => handleClose()}>
                         <div className='
                             m-auto
                             flex
                             flex-row
                             justify-center
-                            max-[550px]:items-start
-                            max-[750px]:items-start
+                            mobile:items-start
+                            tablet:items-start
                             items-center
                             '
                             onClick={(e: React.MouseEvent) => {
@@ -107,8 +107,8 @@ export default function Playing({ isOpen, handleClose }: any) {
                             }}>
                             <SongCoverImage activeSong={activeSong}
                                 className="
-                                max-[550px]:hidden
-                                max-[750px]:hidden
+                                mobile:hidden
+                                tablet:hidden
                                 mb-6
                                 my-4
                             " />
@@ -121,21 +121,21 @@ export default function Playing({ isOpen, handleClose }: any) {
                                 items-center
                                 px-6
                                 py-2
-                                max-[550px]:h-screen
-                                max-[550px]:mt-4
-                                max-[750px]:mt-4
-                                max-[874px]:h-[400px]
-                                max-[1280px]:h-[400px]'>
+                                mobile:h-screen
+                                mobile:mt-4
+                                tablet:mt-4
+                                mini-laptop:h-[400px]
+                                desktop:h-[400px]'>
                                 <div className='
                                     flex
                                     flex-row
                                     justify-between
                                     items-center
                                     text-white
-                                    max-[550px]:w-[340px]
-                                    max-[550px]:mb-6
-                                    max-[750px]:w-[400px]
-                                    max-[750px]:mb-8
+                                    mobile:w-[340px]
+                                    mobile:mb-6
+                                    tablet:w-[400px]
+                                    tablet:mb-8
                                     '>
                                     <Tooltip content="Go back">
                                         <Button
@@ -200,19 +200,19 @@ export default function Playing({ isOpen, handleClose }: any) {
                                 <SongCoverImage
                                     activeSong={activeSong}
                                     className="hidden
-                                    max-[550px]:block max-[550px]:mb-6 max-[550px]:my-4
-                                    max-[750px]:block max-[750px]:mb-6 max-[750px]:my-4" />
-                                <div className='flex flex-col justify-center items-center max-[550px]:pb-14'>
+                                    mobile:block mobile:mb-6 mobile:my-4
+                                    tablet:block tablet:mb-6 tablet:my-4" />
+                                <div className='flex flex-col justify-center items-center mobile:pb-14'>
                                     <div className='mb-10 flex flex-row justify-between items-center w-full 
-                                    max-[550px]:w-[320px]
-                                    max-[750px]:w-[400px]
-                                    max-[874px]:w-[320px]
-                                    max-[1280px]:w-[350px]
+                                    mobile:w-[320px]
+                                    tablet:w-[400px]
+                                    mini-laptop:w-[320px]
+                                    desktop:w-[350px]
                                     
                                      '>
                                         <div>
                                             <p className='text-gray-300 cursor-pointer line-clamp-1 
-                                        text-lg max-[550px]:text-sm max-[874px]:text-base'>
+                                        text-lg mobile:text-sm mini-laptop:text-base'>
                                                 {activeSong!.track_name}
                                             </p>
                                             <p className='text-gray-400 text-sm hover:underline cursor-pointer'
@@ -243,7 +243,7 @@ export default function Playing({ isOpen, handleClose }: any) {
                                         nextSong={toNextSong}
                                         prevSong={toPrevSong}
                                     />
-                                    <div className='flex flex-row justify-between mt-10 w-full max-[550px]:w-[320px] max-[750px]:max-[400px]'>
+                                    <div className='flex flex-row justify-between mt-10 w-full mobile:w-[320px] tablet:max-[400px]'>
                                         <VolumeControl
                                             isFullScreen={true}
                                             updateVolume={updateVolume}
@@ -282,10 +282,10 @@ function SongCoverImage({ activeSong, className }: any) {
             alt="Playing Image"
             className={`
             w-[450px] h-[450px] min-w-[450px]
-            max-[550px]:w-[320px] max-[550px]:h-[320px] max-[550px]:min-w-[320px] max-[550px]:min-h-[320px]
-            max-[750px]:mx-4 max-[750px]:w-[330px] max-[750px]:h-[330px] max-[750px]:min-w-[330px] max-[750px]:min-h-[330px]
-            max-[874px]:mx-4 max-[874px]:w-[370px] max-[874px]:h-[370px] max-[874px]:min-w-[370px]
-            max-[1280px]:mx-4 max-[1280px]:w-[400px] max-[1280px]:h-[400px] max-[1280px]:min-w-[400px]
+            mobile:w-[320px] mobile:h-[320px] mobile:min-w-[320px] mobile:min-h-[320px]
+            tablet:mx-4 tablet:w-[330px] tablet:h-[330px] tablet:min-w-[330px] tablet:min-h-[330px]
+            mini-laptop:mx-4 mini-laptop:w-[370px] mini-laptop:h-[370px] mini-laptop:min-w-[370px]
+            desktop:mx-4 desktop:w-[400px] desktop:h-[400px] desktop:min-w-[400px]
             relative 
             rounded-2xl object-cover 
           ` + className
